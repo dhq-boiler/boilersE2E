@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0-windows;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows10.0.22621.0;net6.0-windows10.0.22621.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <OutputType>Library</OutputType>
@@ -22,6 +22,8 @@
 	<NuspecProperties>$(NuspecProperties);RepositoryUrl=$(RepositoryUrl)</NuspecProperties>
 	<IncludeSymbols>true</IncludeSymbols>
 	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	<IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +31,10 @@
     <PackageReference Include="GitInfo" Version="2.2.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
     <PackageReference Include="NLog" Version="5.0.5" />
+    <PackageReference Include="NuGet.CommandLine" Version="6.3.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="NUnit" Version="3.13.3" />
   </ItemGroup>
 
