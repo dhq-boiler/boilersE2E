@@ -33,7 +33,7 @@ namespace boilersE2E
         public static void OneTimeSetUp()
         {
             var environmentVariable = Environment.GetEnvironmentVariable(boilersE2ETestEnvironmentVariableName);
-            if (environmentVariable == "true")
+            if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
                 wad = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
             }
@@ -43,7 +43,7 @@ namespace boilersE2E
         public static void OneTimeTearDown()
         {
             var environmentVariable = Environment.GetEnvironmentVariable(boilersE2ETestEnvironmentVariableName);
-            if (environmentVariable == "true")
+            if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
                 wad.Kill();
             }
@@ -63,7 +63,7 @@ namespace boilersE2E
                 DoAfterBoot();
 
                 var environmentVariable = Environment.GetEnvironmentVariable(boilersE2ETestEnvironmentVariableName);
-                if (environmentVariable == "true")
+                if (environmentVariable == "true" || environmentVariable == 1.ToString())
                 {
                     Session.Manage().Window.Size = new Size(WindowSize.Width, WindowSize.Height);
                 }
