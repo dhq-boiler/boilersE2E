@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>boilersE2E</id>
+	<version>1.0.0</version>
+    <authors>dhq_boiler</authors>
+    <owners>dhq_boiler</owners>
+	<projectUrl>https://github.com/dhq-boiler/boilersE2E</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<license type="expression">MIT</license>
+    <description>boilersE2E - E2ETest utilities supplier</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>C# E2E Test</tags>
+  </metadata>
+  <files>
+	  <file src="bin\Release\net6.0\*.dll" target="lib\net6.0" />
+	  <file src="bin\Release\net6.0\boilersE2E.pdb" target="lib\net6.0" />
+	  <file src="bin\Release\net7.0\*.dll" target="lib\net7.0" />
+	  <file src="bin\Release\net7.0\boilersE2E.pdb" target="lib\net7.0" />
+	  <file src="**\*.cs" target="src" />
+  </files>
+</package>
