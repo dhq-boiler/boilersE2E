@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "boilersE2E", "boilersE2E\boilersE2E.csproj", "{3C53F65D-F3D9-4AC9-8AF1-7CBED35E70DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boilersE2E", "boilersE2E\boilersE2E.csproj", "{3C53F65D-F3D9-4AC9-8AF1-7CBED35E70DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{B2D7964C-02C6-453B-B780-288A546DDE49}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+		LICENSE = LICENSE
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
