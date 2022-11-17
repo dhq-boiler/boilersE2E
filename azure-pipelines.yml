@@ -46,6 +46,8 @@ steps:
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
   
 - task: NuGetCommand@2
