@@ -44,11 +44,6 @@ steps:
     verbosityPack: Normal
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
-- task: CopyFiles@2
-  inputs:
-    sourceFolder: $(Build.SourcesDirectory)
-    targetFolder: $(Build.ArtifactStagingDirectory)
-
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   inputs:
