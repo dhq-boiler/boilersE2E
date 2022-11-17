@@ -13,10 +13,10 @@
     <tags>C# E2E Test Desktop</tags>
   </metadata>
   <files>
-	  <file src="bin\Release\net6.0-windows10.0.22621.0\*.dll"			target="lib\net6.0-windows10.0.22621.0" />
-	  <file src="bin\Release\net6.0-windows10.0.22621.0\boilersE2E.pdb" target="lib\net6.0-windows10.0.22621.0" />
-	  <file src="bin\Release\net7.0-windows10.0.22621.0\*.dll"			target="lib\net7.0-windows10.0.22621.0" />
-	  <file src="bin\Release\net7.0-windows10.0.22621.0\boilersE2E.pdb" target="lib\net7.0-windows10.0.22621.0" />
+	  <file src="bin\Release\net6.0-windows10.0.22000.0\*.dll"			target="lib\net6.0-windows10.0.22000.0" />
+	  <file src="bin\Release\net6.0-windows10.0.22000.0\boilersE2E.pdb" target="lib\net6.0-windows10.0.22000.0" />
+	  <file src="bin\Release\net7.0-windows10.0.22000.0\*.dll"			target="lib\net7.0-windows10.0.22000.0" />
+	  <file src="bin\Release\net7.0-windows10.0.22000.0\boilersE2E.pdb" target="lib\net7.0-windows10.0.22000.0" />
 	  <file src="**\*.cs" target="src" />
   </files>
 </package>
