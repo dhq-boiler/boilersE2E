@@ -7,10 +7,12 @@
     <OutputType>Library</OutputType>
 	<UseWPF>true</UseWPF>
 	<UseWindowsForms>true</UseWindowsForms>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Appium.WebDriver" Version="4.4.0" />
+    <PackageReference Include="GitInfo" Version="2.2.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
     <PackageReference Include="NLog" Version="5.0.5" />
     <PackageReference Include="NUnit" Version="3.13.3" />
