@@ -51,4 +51,4 @@ steps:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
     nuGetFeedType: 'external'
-    publishFeedCredentials: 'boilerE2E-NuGet'
+    publishFeedCredentials: 'boilersE2E-NuGet'
