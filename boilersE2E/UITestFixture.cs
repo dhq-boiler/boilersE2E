@@ -19,7 +19,7 @@ namespace boilersE2E
 
         protected static WindowsDriver<WindowsElement> Session { get; private set; }
 
-        public static string boilersE2ETestEnvironmentVariableName { get; }
+        public static string boilersE2ETestEnvironmentVariableName { get; set; }
 
         public abstract string AppPath { get; }
 
