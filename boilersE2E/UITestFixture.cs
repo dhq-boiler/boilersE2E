@@ -92,7 +92,7 @@ namespace boilersE2E
             }
         }
 
-        public static WindowsElement WaitForObject(Func<WindowsElement> element, int timeout)
+        public static WindowsElement WaitForObject(Func<WindowsElement> function, int timeOutSeconds = 10)
         {
 
             WindowsElement waitElement = null;
@@ -101,7 +101,7 @@ namespace boilersE2E
             {
                 var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
                 {
-                    Timeout = TimeSpan.FromSeconds(timeout),
+                    Timeout = TimeSpan.FromSeconds(timeOutSeconds),
                     PollingInterval = TimeSpan.FromSeconds(1)
                 };
 
@@ -115,7 +115,7 @@ namespace boilersE2E
 
                 wait.Until(driver =>
                 {
-                    waitElement = element();
+                    waitElement = function();
 
                     return waitElement != null && waitElement.Enabled && waitElement.Displayed;
                 });
@@ -137,13 +137,13 @@ namespace boilersE2E
             element.SendKeys(OpenQA.Selenium.Keys.Control + "v" + OpenQA.Selenium.Keys.Control);
         }
 
-        public static WindowsElement GetElementByAutomationID(string automationId, int timeOut = 10000)
+        public static WindowsElement GetElementByAutomationID(string automationId, int timeOutSeconds = 10)
         {
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
             {
-                Timeout = TimeSpan.FromMilliseconds(timeOut),
+                Timeout = TimeSpan.FromSeconds(timeOutSeconds),
                 Message = $"Element with automationId \"{automationId}\" not found."
             };
 
@@ -167,13 +167,13 @@ namespace boilersE2E
             return element;
         }
 
-        public static WindowsElement GetElementByName(string name, int timeOut = 10000)
+        public static WindowsElement GetElementByName(string name, int timeOutSeconds = 10)
         {
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
             {
-                Timeout = TimeSpan.FromMilliseconds(timeOut),
+                Timeout = TimeSpan.FromSeconds(timeOutSeconds),
                 Message = $"Element with Name \"{name}\" not found."
             };
 
@@ -197,13 +197,13 @@ namespace boilersE2E
             return element;
         }
 
-        public static WindowsElement GetElementBy(By by, int timeOut = 10000)
+        public static WindowsElement GetElementBy(By by, int timeOutSeconds = 10)
         {
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
             {
-                Timeout = TimeSpan.FromMilliseconds(timeOut),
+                Timeout = TimeSpan.FromSeconds(timeOutSeconds),
                 Message = $"Element with By {by.ToString()} not found."
             };
 
@@ -226,13 +226,13 @@ namespace boilersE2E
             return element;
         }
 
-        public static bool ExistsElementByAutomationID(string automationId, int timeOut = 10000)
+        public static bool ExistsElementByAutomationID(string automationId, int timeOutSeconds = 10)
         {
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
             {
-                Timeout = TimeSpan.FromMilliseconds(timeOut),
+                Timeout = TimeSpan.FromSeconds(timeOutSeconds),
                 Message = $"Element with automationId \"{automationId}\" not found."
             };
 
