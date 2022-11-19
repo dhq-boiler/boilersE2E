@@ -19,16 +19,33 @@ namespace boilersE2E
 
         protected static WindowsDriver<WindowsElement> Session { get; private set; }
 
+        /// <summary>
+        /// OneTimeSetUp, OneTimeTearDown時に取得する環境変数の変数名を指定します。
+        /// これは必須です。
+        /// </summary>
         public static string boilersE2ETestEnvironmentVariableName { get; set; }
 
+        /// <summary>
+        /// テストするアプリケーションのパスを指定します。
+        /// </summary>
         public abstract string AppPath { get; }
 
+        /// <summary>
+        /// テストするアプリケーションのウィンドウサイズを指定します。
+        /// </summary>
         public abstract Size WindowSize { get; }
 
+        /// <summary>
+        /// SetUpメソッド内でWindowsDriverオブジェクトを生成し、テストセッションを開始した後に任意の処理を実行します。
+        /// </summary>
         public virtual void DoAfterBoot()
         {
         }
 
+        /// <summary>
+        /// OneTimeSetUpメソッド
+        /// boilersE2ETestEnvironmentVariableNameで指定した環境変数の値が"1"または"true"の時、WinAppDriver.exeのプロセスを起動します。
+        /// </summary>
         [OneTimeSetUp]
         public static void OneTimeSetUp()
         {
@@ -39,6 +56,10 @@ namespace boilersE2E
             }
         }
 
+        /// <summary>
+        /// OneTimeTearDownメソッド
+        /// boilersE2ETestEnvironmentVariableNameで指定した環境変数の値が"1"または"true"の時、WinAppDriver.exeのプロセスをキルします。
+        /// </summary>
         [OneTimeTearDown]
         public static void OneTimeTearDown()
         {
@@ -49,6 +70,11 @@ namespace boilersE2E
             }
         }
 
+        /// <summary>
+        /// SetUpメソッド
+        /// WindowsDriverオブジェクトを生成し、テストセッションを開始します。
+        /// また、boilersE2ETestEnvironmentVariableNameで指定した環境変数の値により、ウィンドウのサイズを変更します。
+        /// </summary>
         [SetUp]
         public void Setup()
         {
@@ -74,6 +100,11 @@ namespace boilersE2E
             }
         }
 
+        /// <summary>
+        /// TearDownメソッド
+        /// 実行中のすべてのウィンドウに対し、Alt+F4を送信してウィンドウを閉じます。
+        /// その後、WindowsDriverオブジェクトのQuitメソッドを呼び出して、テストセッションを終了します。
+        /// </summary>
         [TearDown]
         public void TearDown()
         {
@@ -92,6 +123,12 @@ namespace boilersE2E
             }
         }
 
+        /// <summary>
+        /// 指定した Func が完了するかタイムアウト時間が経過するまで待機し、Funcから得られる要素を返します。
+        /// </summary>
+        /// <param name="function">Funcオブジェクト</param>
+        /// <param name="timeOutSeconds">タイムアウト秒数</param>
+        /// <returns>functionから返される WindowsElement オブジェクト</returns>
         public static WindowsElement WaitForObject(Func<WindowsElement> function, int timeOutSeconds = 10)
         {
 
@@ -131,12 +168,23 @@ namespace boilersE2E
             }
         }
 
+        /// <summary>
+        /// 要素に文字列を入力します。
+        /// </summary>
+        /// <param name="element">文字列を入力する対象の WindowsElement オブジェクト</param>
+        /// <param name="text">入力する文字列</param>
         public static void InputText(WindowsElement element, string text)
         {
             Util.SetTextToClipboard(text);
             element.SendKeys(OpenQA.Selenium.Keys.Control + "v" + OpenQA.Selenium.Keys.Control);
         }
 
+        /// <summary>
+        /// AutomationIDで要素を検索し、取得します。
+        /// </summary>
+        /// <param name="automationId">AutomationID</param>
+        /// <param name="timeOutSeconds">タイムアウト秒数</param>
+        /// <returns>取得したWindowsElementオブジェクト</returns>
         public static WindowsElement GetElementByAutomationID(string automationId, int timeOutSeconds = 10)
         {
             WindowsElement element = null;
@@ -167,6 +215,12 @@ namespace boilersE2E
             return element;
         }
 
+        /// <summary>
+        /// 名前で要素を検索し、取得します。
+        /// </summary>
+        /// <param name="name">要素の名前</param>
+        /// <param name="timeOutSeconds">タイムアウト秒数</param>
+        /// <returns>取得したWindowsElementオブジェクト</returns>
         public static WindowsElement GetElementByName(string name, int timeOutSeconds = 10)
         {
             WindowsElement element = null;
@@ -197,6 +251,12 @@ namespace boilersE2E
             return element;
         }
 
+        /// <summary>
+        /// 要素を取得します。
+        /// </summary>
+        /// <param name="by">OpenQA.Selenium.Byオブジェクト</param>
+        /// <param name="timeOutSeconds">タイムアウト秒数</param>
+        /// <returns>取得したWindowsElementオブジェクト</returns>
         public static WindowsElement GetElementBy(By by, int timeOutSeconds = 10)
         {
             WindowsElement element = null;
@@ -226,6 +286,12 @@ namespace boilersE2E
             return element;
         }
 
+        /// <summary>
+        /// AutomationIDで要素を検索し、存在するか検証します。
+        /// </summary>
+        /// <param name="automationId">AutomationID</param>
+        /// <param name="timeOutSeconds">タイムアウト秒数</param>
+        /// <returns>存在する場合は true、存在しない場合は false を返します。</returns>
         public static bool ExistsElementByAutomationID(string automationId, int timeOutSeconds = 10)
         {
             WindowsElement element = null;
@@ -256,6 +322,11 @@ namespace boilersE2E
             return element != null;
         }
 
+        /// <summary>
+        /// 要素が存在するか検証します。
+        /// </summary>
+        /// <param name="by">OpenQA.Selenium.Byオブジェクト</param>
+        /// <returns>存在する場合は true、存在しない場合は false を返します。</returns>
         public static bool IsElementPresent(By by)
         {
             try
@@ -273,6 +344,11 @@ namespace boilersE2E
             }
         }
 
+        /// <summary>
+        /// スクリーンショットを撮影します。
+        /// スクリーンショットの保存先ディレクトリは $(TargetDir) になります。
+        /// </summary>
+        /// <param name="filename">撮影したスクリーンショットの保存ファイル名</param>
         public static void TakeScreenShot(string filename)
         {
             Session.GetScreenshot().SaveAsFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
