@@ -11,7 +11,7 @@ using System.Net;
 
 namespace boilersE2E
 {
-    public abstract class UITestFixture
+    public abstract class E2ETestFixture
     {
         private const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723";
         private static readonly Logger s_logger = LogManager.GetCurrentClassLogger();
