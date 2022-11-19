@@ -131,7 +131,7 @@ namespace boilersE2E
             }
         }
 
-        public static void InjectText(WindowsElement element, string text)
+        public static void InputText(WindowsElement element, string text)
         {
             Util.SetTextToClipboard(text);
             element.SendKeys(OpenQA.Selenium.Keys.Control + "v" + OpenQA.Selenium.Keys.Control);
