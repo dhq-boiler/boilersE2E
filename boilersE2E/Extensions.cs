@@ -17,7 +17,7 @@ namespace boilersE2E
         public static void InputText(this Actions actions, WindowsElement element, string text)
         {
             Util.SetTextToClipboard(text);
-            actions.SendKeys(element, Keys.Control + "v" + Keys.Control);
+            actions.SendKeys(element, OpenQA.Selenium.Keys.Control + "v" + OpenQA.Selenium.Keys.Control);
         }
     }
 }
