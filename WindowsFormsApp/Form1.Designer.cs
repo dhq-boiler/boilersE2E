@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApp
+﻿using WindowsFormsApp.Controls;
+
+namespace WindowsFormsApp
 {
     partial class Form1
     {
@@ -49,7 +51,7 @@
             this.Clear = new System.Windows.Forms.Button();
             this.ClearEntry = new System.Windows.Forms.Button();
             this.backspace = new System.Windows.Forms.Button();
-            this.fomula = new System.Windows.Forms.Label();
+            this.fomula = new UnfocusableTextbox();
             this.SuspendLayout();
             // 
             // display
@@ -306,11 +308,14 @@
             // fomula
             // 
             this.fomula.AccessibleName = "fomula";
+            this.fomula.CausesValidation = false;
             this.fomula.Location = new System.Drawing.Point(29, 7);
             this.fomula.Name = "fomula";
-            this.fomula.Size = new System.Drawing.Size(505, 12);
+            this.fomula.ReadOnly = true;
+            this.fomula.Size = new System.Drawing.Size(505, 19);
             this.fomula.TabIndex = 21;
-            this.fomula.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.fomula.TabStop = false;
+            this.fomula.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Form1
             // 
@@ -370,7 +375,7 @@
         private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.Button ClearEntry;
         private System.Windows.Forms.Button backspace;
-        private System.Windows.Forms.Label fomula;
+        private System.Windows.Forms.TextBox fomula;
     }
 }
 

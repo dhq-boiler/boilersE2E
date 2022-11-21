@@ -15,6 +15,7 @@ namespace WindowsFormsApp
         public Form1()
         {
             InitializeComponent();
+            fomula.Text = string.Empty;
         }
 
         private bool clearFlag = false;
@@ -59,8 +60,8 @@ namespace WindowsFormsApp
         {
             return fomula.Text.Last() == '+'
                 || fomula.Text.Last() == '-'
-                || fomula.Text.Last() == '*'
-                || fomula.Text.Last() == '/';
+                || fomula.Text.Last() == '×'
+                || fomula.Text.Last() == '÷';
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -165,14 +166,14 @@ namespace WindowsFormsApp
         private void multiple_Click(object sender, EventArgs e)
         {
             RemovePreviousAddedOperatorIfPreviousCharIsOperator();
-            fomula.Text += "*";
+            fomula.Text += "×";
             clearFlag = true;
         }
 
         private void divide_Click(object sender, EventArgs e)
         {
             RemovePreviousAddedOperatorIfPreviousCharIsOperator();
-            fomula.Text += "/";
+            fomula.Text += "÷";
             clearFlag = true;
         }
 
@@ -185,7 +186,7 @@ namespace WindowsFormsApp
 
         private void equal_Click(object sender, EventArgs e)
         {
-            display.Text = StrCalc<double>(fomula.Text).ToString();
+            display.Text = StrCalc<double>(fomula.Text.Replace("×", "*").Replace("÷", "/")).ToString();
         }
 
         private void Clear_Click(object sender, EventArgs e)
