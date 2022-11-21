@@ -1,5 +1,3 @@
-using boilersE2E;
-using OpenQA.Selenium;
 using System.Drawing;
 using System.Reflection;
 
