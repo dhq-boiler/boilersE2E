@@ -30,6 +30,11 @@ steps:
   inputs:
     arguments: '--configuration $(BuildConfiguration)'
 
+- task: Windows Application Driver@0
+  inputs:
+    OperationType: 'Start'
+    AgentResolution: '1080p'
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
   inputs:
@@ -37,6 +42,11 @@ steps:
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura -- RunConfiguration.DisableAppDomain=true'
     publishTestResults: true
     projects: 'boilersE2E.Test'
+
+- task: Windows Application Driver@0
+  condition: always()
+  inputs:
+    OperationType: 'Stop'
 
 - powershell: 'echo "##vso[task.setvariable variable=PackageVersion]$($env:Build_SourceBranchName.Substring(1))"'
   displayName: 'PowerShell Script'
