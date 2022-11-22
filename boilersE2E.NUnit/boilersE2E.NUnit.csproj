@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFrameworks>net7.0-windows10.0.22000.0;net6.0-windows10.0.22000.0</TargetFrameworks>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+	<OutputType>Library</OutputType>
+	<UseWPF>true</UseWPF>
+	<UseWindowsForms>true</UseWindowsForms>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<NuspecFile>boilersE2E.NUnit.nuspec</NuspecFile>
+	<NuspecProperties>$(NuspecProperties);configuration=$(Configuration)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);version=$(PackageVersion)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);id=$(PackageId)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);author=$(Authors)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);PackageProjectUrl=$(PackageProjectUrl)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);Description=$(Description)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);PackageReleaseNotes=$(PackageReleaseNotes)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);Copyright=$(Copyright)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);PackageTags=$(PackageTags)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);RepositoryType=$(RepositoryType)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);RepositoryUrl=$(RepositoryUrl)</NuspecProperties>
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	<IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\boilersE2E\boilersE2E.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boilersE2E", "boilersE2E\boilersE2E.csproj", "{3C53F65D-F3D9-4AC9-8AF1-7CBED35E70DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boilersE2E.Core", "boilersE2E\boilersE2E.Core.csproj", "{3C53F65D-F3D9-4AC9-8AF1-7CBED35E70DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{B2D7964C-02C6-453B-B780-288A546DDE49}"
 	ProjectSection(SolutionItems) = preProject
@@ -14,9 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp", "WindowsFormsApp\WindowsFormsApp.csproj", "{54AB59E7-FD12-4A25-9AA1-CEF02AE7E57F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boilersE2E.Test", "boilersE2E.Test\boilersE2E.Test.csproj", "{AE68739A-21CE-4FBD-B692-9671F4BB956A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boilersE2E.NUnit.Test", "boilersE2E.Test\boilersE2E.NUnit.Test.csproj", "{AE68739A-21CE-4FBD-B692-9671F4BB956A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFApp", "WPFApp\WPFApp.csproj", "{04595711-163D-4D7F-8DF3-77A98E2BAB54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFApp", "WPFApp\WPFApp.csproj", "{04595711-163D-4D7F-8DF3-77A98E2BAB54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "boilersE2E.NUnit", "boilersE2E.NUnit\boilersE2E.NUnit.csproj", "{C336B63C-F2F1-4346-B700-C8EF05F755C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{04595711-163D-4D7F-8DF3-77A98E2BAB54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04595711-163D-4D7F-8DF3-77A98E2BAB54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04595711-163D-4D7F-8DF3-77A98E2BAB54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C336B63C-F2F1-4346-B700-C8EF05F755C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C336B63C-F2F1-4346-B700-C8EF05F755C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C336B63C-F2F1-4346-B700-C8EF05F755C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C336B63C-F2F1-4346-B700-C8EF05F755C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

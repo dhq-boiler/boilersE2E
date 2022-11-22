@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFrameworks>net7.0-windows10.0.22000.0;net6.0-windows10.0.22000.0</TargetFrameworks>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\boilersE2E\boilersE2E.csproj" />
+    <ProjectReference Include="..\boilersE2E.NUnit\boilersE2E.NUnit.csproj" />
     <ProjectReference Include="..\WindowsFormsApp\WindowsFormsApp.csproj" />
     <ProjectReference Include="..\WPFApp\WPFApp.csproj" />
   </ItemGroup>

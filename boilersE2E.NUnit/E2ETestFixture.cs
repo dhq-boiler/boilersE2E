@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 
-namespace boilersE2E
+namespace boilersE2E.NUnit
 {
     public abstract class E2ETestFixture
     {

@@ -1,8 +1,8 @@
 ﻿namespace boilersE2E
 {
-    internal static class Util
+    public static class Util
     {
-        internal static void SetTextToClipboard(string text)
+        public static void SetTextToClipboard(string text)
         {
             if (AppDomain.CurrentDomain.GetAssemblies().SingleOrDefault(x => x.GetName().Name == "PresentationFramework") is not null
                 && System.Windows.Application.Current is not null) //WPF 実行時

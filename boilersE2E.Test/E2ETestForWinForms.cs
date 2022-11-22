@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Reflection;
 
-namespace boilersE2E.Test
+namespace boilersE2E.NUnit.Test
 {
     public class E2ETestForWinForms : E2ETestFixture
     {
