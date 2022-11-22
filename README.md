@@ -1,28 +1,40 @@
 # boilersE2E
 
-boilersE2E ‚Í Windows Desktop ƒAƒvƒŠŒü‚¯‚Ì E2E ƒeƒXƒg‚Ì‚½‚ß‚Ìƒ†[ƒeƒBƒŠƒeƒB[ƒ‰ƒCƒuƒ‰ƒŠ‚Å‚·B
+boilersE2E ã¯ Windows Desktop ã‚¢ãƒ—ãƒªå‘ã‘ã® E2E ãƒ†ã‚¹ãƒˆã®ãŸã‚ã®ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ãƒ¼ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
-## How to use / g—p•û–@
+## How to use / ä½¿ç”¨æ–¹æ³•
 
-1. WinAppDriver ‚ğƒCƒ“ƒXƒg[ƒ‹‚µ‚Ü‚·B
+1. WinAppDriver ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™ã€‚
 
-[https://github.com/microsoft/WinAppDriver/releases](https://github.com/microsoft/WinAppDriver/releases)
+   [https://github.com/microsoft/WinAppDriver/releases](https://github.com/microsoft/WinAppDriver/releases)
 
-2. E2E ƒeƒXƒgƒvƒƒWƒFƒNƒg‚ğì¬‚µANuget‚Å boilersE2E ‚ğ’Ç‰Á‚µ‚Ü‚·B
+2. E2E ãƒ†ã‚¹ãƒˆãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã€Nugetã§ boilersE2E ã‚’è¿½åŠ ã—ã¾ã™ã€‚
 
-3. boilersE2E.E2ETestFixture ƒNƒ‰ƒX‚ğŒp³‚µ‚½”CˆÓ‚ÌƒNƒ‰ƒX‚ğì¬‚µ‚Ü‚·B
+3. boilersE2E.E2ETestFixture ã‚¯ãƒ©ã‚¹ã‚’ç¶™æ‰¿ã—ãŸä»»æ„ã®ã‚¯ãƒ©ã‚¹ã‚’ä½œæˆã—ã¾ã™ã€‚
 
-4. AppPathAWindowSize ‚ğƒI[ƒo[ƒ‰ƒCƒh‚µ‚Äw’è‚µ‚Ü‚·B
+4. AppPathã€WindowSize ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã¦æŒ‡å®šã—ã¾ã™ã€‚
 
-5. ƒXƒ^ƒeƒBƒbƒNƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Å boilersE2ETestEnvironmentVariableName ‚ğw’è‚µ‚Ü‚·B
+   https://github.com/dhq-boiler/boilersE2E/blob/e6afa0973bf7e1aa8bfe277ef0cadd842140abab/boilersE2E.Test/E2ETestForWPF.cs#L8-L10
 
-6. E2EƒeƒXƒg‚ğÀs‚·‚éƒVƒXƒeƒ€‚ÅAboilersE2ETestEnvironmentVariableName ‚Éw’è‚µ‚½–¼‘O‚ÌŠÂ‹«•Ï”‚ğì¬‚µA’l‚ğ true ‚É‚µ‚Ü‚·B
-   Azure DevOps pipeline ‚ÅE2EƒeƒXƒg‚ğÀs‚·‚éê‡‚ÍA Windows Application Driver ƒ^ƒXƒN‚ğÀs‚·‚é‚Ì‚Å false ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B
+5. ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã§ boilersE2ETestEnvironmentVariableName ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-7. ‚¨D‚«‚È‚æ‚¤‚ÉE2EƒeƒXƒgƒƒ\ƒbƒh‚ğÀ‘•‚µ‚Ü‚·B
+   https://github.com/dhq-boiler/boilersE2E/blob/e6afa0973bf7e1aa8bfe277ef0cadd842140abab/boilersE2E.Test/E2ETestForWPF.cs#L11-L14
 
-8. E2EƒeƒXƒg‚ğÀs‚µ‚Ü‚·B
+6. E2Eãƒ†ã‚¹ãƒˆã‚’å®Ÿè¡Œã™ã‚‹ã‚·ã‚¹ãƒ†ãƒ ã§ã€boilersE2ETestEnvironmentVariableName ã«æŒ‡å®šã—ãŸåå‰ã®ç’°å¢ƒå¤‰æ•°ã‚’ä½œæˆã—ã€å€¤ã‚’ true ã«ã—ã¾ã™ã€‚
+   Azure DevOps pipeline ã§E2Eãƒ†ã‚¹ãƒˆã‚’å®Ÿè¡Œã™ã‚‹å ´åˆã¯ã€ Windows Application Driver ã‚¿ã‚¹ã‚¯ã‚’å®Ÿè¡Œã™ã‚‹ã®ã§ false ã‚’æŒ‡å®šã—ã¦ãã ã•ã„ã€‚
 
-## LICENSE / ƒ‰ƒCƒZƒ“ƒX
+7. ãŠå¥½ããªã‚ˆã†ã«E2Eãƒ†ã‚¹ãƒˆãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè£…ã—ã¾ã™ã€‚
+   
+   * WPFå‘ã‘ã‚µãƒ³ãƒ—ãƒ«ã‚³ãƒ¼ãƒ‰
+
+     https://github.com/dhq-boiler/boilersE2E/blob/e6afa0973bf7e1aa8bfe277ef0cadd842140abab/boilersE2E.Test/E2ETestForWPF.cs
+   
+   * WinFormså‘ã‘ã‚µãƒ³ãƒ—ãƒ«ã‚³ãƒ¼ãƒ‰
+   
+     https://github.com/dhq-boiler/boilersE2E/blob/e6afa0973bf7e1aa8bfe277ef0cadd842140abab/boilersE2E.Test/E2ETestForWinForms.cs
+
+8. E2Eãƒ†ã‚¹ãƒˆã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
+
+## LICENSE / ãƒ©ã‚¤ã‚»ãƒ³ã‚¹
 
 MIT License
