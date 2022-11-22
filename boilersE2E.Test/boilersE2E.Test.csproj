@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\boilersE2E\boilersE2E.csproj" />
     <ProjectReference Include="..\WindowsFormsApp\WindowsFormsApp.csproj" />
+    <ProjectReference Include="..\WPFApp\WPFApp.csproj" />
   </ItemGroup>
 
 </Project>
