@@ -1,5 +1,5 @@
-﻿using NLog;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NLog;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 
-namespace boilersE2E
+namespace boilersE2E.MsTest
 {
     public abstract class E2ETestFixture
     {
@@ -17,10 +17,12 @@ namespace boilersE2E
         private static readonly Logger s_logger = LogManager.GetCurrentClassLogger();
         private static Process wad;
 
+        private static TestContext s_testContext;
+
         protected static WindowsDriver<WindowsElement> Session { get; private set; }
 
         /// <summary>
-        /// OneTimeSetUp, OneTimeTearDown時に取得する環境変数の変数名を指定します。
+        /// ClassInitialize, ClassCleanup時に取得する環境変数の変数名を指定します。
         /// これは必須です。
         /// </summary>
         public static string boilersE2ETestEnvironmentVariableName { get; set; }
@@ -36,19 +38,20 @@ namespace boilersE2E
         public abstract Size WindowSize { get; }
 
         /// <summary>
-        /// SetUpメソッド内でWindowsDriverオブジェクトを生成し、テストセッションを開始した後に任意の処理を実行します。
+        /// TestInitializeメソッド内でWindowsDriverオブジェクトを生成し、テストセッションを開始した後に任意の処理を実行します。
         /// </summary>
         public virtual void DoAfterBoot()
         {
         }
 
         /// <summary>
-        /// OneTimeSetUpメソッド
+        /// ClassInitializeメソッド
         /// boilersE2ETestEnvironmentVariableNameで指定した環境変数の値が"1"または"true"の時、WinAppDriver.exeのプロセスを起動します。
         /// </summary>
-        [OneTimeSetUp]
-        public static void OneTimeSetUp()
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext testContext)
         {
+            E2ETestFixture.s_testContext = testContext;
             var environmentVariable = Environment.GetEnvironmentVariable(boilersE2ETestEnvironmentVariableName);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
@@ -57,11 +60,11 @@ namespace boilersE2E
         }
 
         /// <summary>
-        /// OneTimeTearDownメソッド
+        /// ClassCleanupメソッド
         /// boilersE2ETestEnvironmentVariableNameで指定した環境変数の値が"1"または"true"の時、WinAppDriver.exeのプロセスをキルします。
         /// </summary>
-        [OneTimeTearDown]
-        public static void OneTimeTearDown()
+        [ClassCleanup]
+        public static void ClassCleanup()
         {
             var environmentVariable = Environment.GetEnvironmentVariable(boilersE2ETestEnvironmentVariableName);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
@@ -71,12 +74,12 @@ namespace boilersE2E
         }
 
         /// <summary>
-        /// SetUpメソッド
+        /// TestInitializeメソッド
         /// WindowsDriverオブジェクトを生成し、テストセッションを開始します。
         /// また、boilersE2ETestEnvironmentVariableNameで指定した環境変数の値により、ウィンドウのサイズを変更します。
         /// </summary>
-        [SetUp]
-        public void Setup()
+        [TestInitialize]
+        public void TestInitialize()
         {
             if (Session == null)
             {
@@ -84,7 +87,7 @@ namespace boilersE2E
                 options.AddAdditionalCapability("app", AppPath);
                 options.AddAdditionalCapability("appWorkingDir", Path.GetDirectoryName(AppPath));
                 Session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), options);
-                Assert.That(Session, Is.Not.Null);
+                Assert.IsNotNull(Session);
 
                 DoAfterBoot();
 
@@ -101,12 +104,12 @@ namespace boilersE2E
         }
 
         /// <summary>
-        /// TearDownメソッド
+        /// TestCleanupメソッド
         /// 実行中のすべてのウィンドウに対し、Alt+F4を送信してウィンドウを閉じます。
         /// その後、WindowsDriverオブジェクトのQuitメソッドを呼び出して、テストセッションを終了します。
         /// </summary>
-        [TearDown]
-        public void TearDown()
+        [TestCleanup]
+        public void TestCleanup()
         {
             if (Session != null)
             {
@@ -352,7 +355,7 @@ namespace boilersE2E
         public static void TakeScreenShot(string filename)
         {
             Session.GetScreenshot().SaveAsFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
-            TestContext.AddTestAttachment($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
+            s_testContext.AddResultFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
         }
     }
 }
