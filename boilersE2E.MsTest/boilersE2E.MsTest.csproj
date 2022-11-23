@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	  <TargetFrameworks>net7.0-windows10.0.22000.0;net6.0-windows10.0.22000.0</TargetFrameworks>
@@ -28,13 +28,14 @@
 
   <ItemGroup>
     <PackageReference Include="Appium.WebDriver" Version="4.4.0" />
+    <PackageReference Include="GitInfo" Version="2.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
     <PackageReference Include="MSTest" Version="2.2.10" />
     <PackageReference Include="NLog" Version="5.0.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\boilersE2E\boilersE2E.Core.csproj" />
+    <ProjectReference Include="..\boilersE2E.Core\boilersE2E.Core.csproj" />
   </ItemGroup>
 
 </Project>
