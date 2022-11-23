@@ -25,9 +25,13 @@
 	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	<IsPackable>true</IsPackable>
   </PropertyGroup>
+	
+  <ItemGroup>
+  	<PackageReference Include="GitInfo" Version="2.3.0" />
+  </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\boilersE2E\boilersE2E.Core.csproj" />
+  	<ProjectReference Include="..\boilersE2E.Core\boilersE2E.Core.csproj" />
   </ItemGroup>
 
 </Project>
