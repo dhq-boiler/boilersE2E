@@ -71,6 +71,7 @@ steps:
     versionEnvVar: PackageVersion
     verbosityPack: Normal
     projects: |
+      boilersE2E.Core
       boilersE2E.xUnit
       boilersE2E.NUnit
       boilersE2E.MsTest
