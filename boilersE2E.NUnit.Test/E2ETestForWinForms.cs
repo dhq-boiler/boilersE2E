@@ -14,7 +14,7 @@ namespace boilersE2E.NUnit.Test
         }
 
         [Test]
-        public void ŒvŽZ_123‘«‚·456()
+        public void Calc_123Plus456()
         {
             Session.FindElementByAccessibilityId("one").Click();
             Session.FindElementByAccessibilityId("two").Click();
@@ -29,7 +29,7 @@ namespace boilersE2E.NUnit.Test
         }
 
         [Test]
-        public void ŒvŽZ_123ˆø‚­456()
+        public void Calc_123Minus456()
         {
             Session.FindElementByAccessibilityId("one").Click();
             Session.FindElementByAccessibilityId("two").Click();
@@ -44,7 +44,7 @@ namespace boilersE2E.NUnit.Test
         }
 
         [Test]
-        public void ŒvŽZ_369Š|‚¯‚é3()
+        public void Calc_369Multiple3()
         {
             Session.FindElementByAccessibilityId("three").Click();
             Session.FindElementByAccessibilityId("six").Click();
@@ -57,7 +57,7 @@ namespace boilersE2E.NUnit.Test
         }
 
         [Test]
-        public void ŒvŽZ_369Š„‚é3()
+        public void Calc_369Divide3()
         {
             Session.FindElementByAccessibilityId("three").Click();
             Session.FindElementByAccessibilityId("six").Click();
@@ -70,7 +70,7 @@ namespace boilersE2E.NUnit.Test
         }
 
         [Test]
-        public void ŒvŽZ_33_3Š„‚é3()
+        public void Calc_33_3Divide3()
         {
             Session.FindElementByAccessibilityId("three").Click();
             Session.FindElementByAccessibilityId("three").Click();
