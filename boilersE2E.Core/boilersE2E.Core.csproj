@@ -8,7 +8,7 @@
 	<UseWPF>true</UseWPF>
 	<UseWindowsForms>true</UseWindowsForms>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	<NuspecFile>boilersE2E.nuspec</NuspecFile>
+	<NuspecFile>boilersE2E.Core.nuspec</NuspecFile>
 	<NuspecProperties>$(NuspecProperties);configuration=$(Configuration)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);version=$(PackageVersion)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);id=$(PackageId)</NuspecProperties>
