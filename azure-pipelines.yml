@@ -41,7 +41,7 @@ steps:
     command: 'test'
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura -- RunConfiguration.DisableAppDomain=true'
     publishTestResults: true
-    projects: 
+    projects: |
       'boilersE2E.xUnit.Test'
       'boilersE2E.NUnit.Test'
       'boilersE2E.MsTest.Test'
@@ -63,7 +63,7 @@ steps:
     versioningScheme: byEnvVar
     versionEnvVar: PackageVersion
     verbosityPack: Normal
-    projects: 
+    projects: |
       'boilersE2E.xUnit'
       'boilersE2E.NUnit'
       'boilersE2E.MsTest'
