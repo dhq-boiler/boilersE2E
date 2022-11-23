@@ -42,9 +42,9 @@ steps:
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura -- RunConfiguration.DisableAppDomain=true'
     publishTestResults: true
     projects: |
-      'boilersE2E.xUnit.Test'
-      'boilersE2E.NUnit.Test'
-      'boilersE2E.MsTest.Test'
+      boilersE2E.xUnit.Test
+      boilersE2E.NUnit.Test
+      boilersE2E.MsTest.Test
 
 - task: Windows Application Driver@0
   condition: always()
@@ -64,9 +64,9 @@ steps:
     versionEnvVar: PackageVersion
     verbosityPack: Normal
     projects: |
-      'boilersE2E.xUnit'
-      'boilersE2E.NUnit'
-      'boilersE2E.MsTest'
+      boilersE2E.xUnit
+      boilersE2E.NUnit
+      boilersE2E.MsTest
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
 - task: PublishBuildArtifacts@1
