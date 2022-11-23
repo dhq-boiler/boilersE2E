@@ -4,10 +4,10 @@ boilersE2E は Windows Desktop アプリ向けの E2E テストのためのユ�
 
 boilersE2E は以下のライブラリから構成されます。
 
-* boilersE2E.Core ![boilersE2E.Core](https://img.shields.io/nuget/v/boilersE2E.Core) ・・・boilersE2Eのコア機能を含むライブラリ。必須。
-* boilersE2E.xUnit ![boilersE2E.xUnit](https://img.shields.io/nuget/v/boilersE2E.xUnit) ・・・xUnit向けライブラリ。
-* boilersE2E.NUnit ![boilersE2E.NUnit](https://img.shields.io/nuget/v/boilersE2E.NUnit) ・・・NUnit向けライブラリ。
-* boilersE2E.MsTest ![boilersE2E.MsTest](https://img.shields.io/nuget/v/boilersE2E.MsTest) ・・・MsTest向けライブラリ。
+* boilersE2E.Core [![boilersE2E.Core](https://img.shields.io/nuget/v/boilersE2E.Core)](https://www.nuget.org/packages/boilersE2E.Core/) ・・・boilersE2Eのコア機能を含むライブラリ。必須。
+* boilersE2E.xUnit [![boilersE2E.xUnit](https://img.shields.io/nuget/v/boilersE2E.xUnit)](https://www.nuget.org/packages/boilersE2E.xUnit/) ・・・xUnit向けライブラリ。
+* boilersE2E.NUnit [![boilersE2E.NUnit](https://img.shields.io/nuget/v/boilersE2E.NUnit)](https://www.nuget.org/packages/boilersE2E.NUnit/) ・・・NUnit向けライブラリ。
+* boilersE2E.MsTest [![boilersE2E.MsTest](https://img.shields.io/nuget/v/boilersE2E.MsTest)](https://www.nuget.org/packages/boilersE2E.MsTest/) ・・・MsTest向けライブラリ。
 
 あなたが使用しているテストフレームワークに合わせて、NuGetからインストールしてください。
 
