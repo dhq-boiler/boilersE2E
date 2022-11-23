@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\boilersE2E.xUnit\boilersE2E.xUnit.csproj" />
-    <ProjectReference Include="..\boilersE2E\boilersE2E.Core\boilersE2E.Core.csproj" />
+    <ProjectReference Include="..\boilersE2E.Core\boilersE2E.Core.csproj" />
     <ProjectReference Include="..\WindowsFormsApp\WindowsFormsApp.csproj" />
     <ProjectReference Include="..\WPFApp\WPFApp.csproj" />
   </ItemGroup>
