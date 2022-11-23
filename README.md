@@ -2,7 +2,29 @@
 
 boilersE2E は Windows Desktop アプリ向けの E2E テストのためのユーティリティーライブラリです。
 
-## How to use / 使用方法
+boilersE2E は以下のライブラリから構成されます。
+
+* boilersE2E.Core ・・・boilersE2Eのコア機能を含むライブラリ。必須。
+* boilersE2E.xUnit ・・・xUnit向けライブラリ。
+* boilersE2E.NUnit ・・・NUnit向けライブラリ。
+* boilersE2E.MsTest ・・・MsTest向けライブラリ。
+
+あなたが使用しているテストフレームワークに合わせて、NuGetからインストールしてください。
+
+以下では、NUnitの使用方法の例を記載しています。
+
+その他のテストフレームワークでの使用方法が知りたい方は、以下を参照ください。
+
+* [https://github.com/dhq-boiler/boilersE2E/tree/develop/boilersE2E.xUnit.Test](https://github.com/dhq-boiler/boilersE2E/tree/develop/boilersE2E.xUnit.Test)
+* [https://github.com/dhq-boiler/boilersE2E/tree/develop/boilersE2E.NUnit.Test](https://github.com/dhq-boiler/boilersE2E/tree/develop/boilersE2E.NUnit.Test)
+* [https://github.com/dhq-boiler/boilersE2E/tree/develop/boilersE2E.MsTest.Test](https://github.com/dhq-boiler/boilersE2E/tree/develop/boilersE2E.MsTest.Test)
+
+## Requirements / 要件
+
+* Windows 10.0.22000.0 以降のWindows環境
+* .NET 6.0 or 7.0
+
+## How to use for NUnit / NUnitでの使用方法
 
 1. WinAppDriver をインストールします。
 
@@ -14,11 +36,11 @@ boilersE2E は Windows Desktop アプリ向けの E2E テストのためのユ�
 
 4. AppPath、WindowSize をオーバーライドして指定します。
 
-   https://github.com/dhq-boiler/boilersE2E/blob/e6afa0973bf7e1aa8bfe277ef0cadd842140abab/boilersE2E.Test/E2ETestForWPF.cs#L8-L10
+   https://github.com/dhq-boiler/boilersE2E/blob/d19b900ab1daa26f3803b56bf7a480a50d824bfc/boilersE2E.NUnit.Test/E2ETestForWPF.cs#L8-L10
 
 5. スタティックコンストラクタで boilersE2ETestEnvironmentVariableName を指定します。
 
-   https://github.com/dhq-boiler/boilersE2E/blob/e6afa0973bf7e1aa8bfe277ef0cadd842140abab/boilersE2E.Test/E2ETestForWPF.cs#L11-L14
+   https://github.com/dhq-boiler/boilersE2E/blob/d19b900ab1daa26f3803b56bf7a480a50d824bfc/boilersE2E.NUnit.Test/E2ETestForWPF.cs#L11-L14
 
 6. E2Eテストを実行するシステムで、boilersE2ETestEnvironmentVariableName に指定した名前の環境変数を作成し、値を true にします。
    Azure DevOps pipeline でE2Eテストを実行する場合は、 Windows Application Driver タスクを実行するので false を指定してください。
@@ -27,11 +49,11 @@ boilersE2E は Windows Desktop アプリ向けの E2E テストのためのユ�
    
    * WPF向けサンプルコード
 
-     https://github.com/dhq-boiler/boilersE2E/blob/e6afa0973bf7e1aa8bfe277ef0cadd842140abab/boilersE2E.Test/E2ETestForWPF.cs
+     https://github.com/dhq-boiler/boilersE2E/blob/d19b900ab1daa26f3803b56bf7a480a50d824bfc/boilersE2E.NUnit.Test/E2ETestForWPF.cs
    
    * WinForms向けサンプルコード
    
-     https://github.com/dhq-boiler/boilersE2E/blob/e6afa0973bf7e1aa8bfe277ef0cadd842140abab/boilersE2E.Test/E2ETestForWinForms.cs
+     https://github.com/dhq-boiler/boilersE2E/blob/d19b900ab1daa26f3803b56bf7a480a50d824bfc/boilersE2E.NUnit.Test/E2ETestForWinForms.cs
 
 8. E2Eテストを実行します。
 
