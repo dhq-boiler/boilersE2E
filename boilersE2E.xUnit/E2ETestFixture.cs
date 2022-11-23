@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;

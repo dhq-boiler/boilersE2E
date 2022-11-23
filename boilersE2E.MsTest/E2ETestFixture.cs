@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 
-namespace boilersE2E.NUnit
+namespace boilersE2E.MsTest
 {
     public abstract class E2ETestFixture
     {

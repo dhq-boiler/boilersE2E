@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Reflection;
 
 namespace boilersE2E.NUnit.Test
