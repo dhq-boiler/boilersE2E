@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="Appium.WebDriver" Version="4.4.0" />
-    <PackageReference Include="GitInfo" Version="2.2.1" />
+    <PackageReference Include="GitInfo" Version="2.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
     <PackageReference Include="NLog" Version="5.0.5" />
     <PackageReference Include="NuGet.CommandLine" Version="6.3.1">
