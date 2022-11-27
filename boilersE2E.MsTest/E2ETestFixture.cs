@@ -11,6 +11,7 @@ using System.Net;
 
 namespace boilersE2E.MsTest
 {
+    [TestClass]
     public abstract class E2ETestFixture
     {
         private const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723";
@@ -53,7 +54,7 @@ namespace boilersE2E.MsTest
         {
             E2ETestFixture.s_testContext = testContext;
             var environmentVariable = Environment.GetEnvironmentVariable(boilersE2ETestEnvironmentVariableName);
-            if (environmentVariable == "true" || environmentVariable == 1.ToString())
+            if (wad is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
             {
                 wad = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
             }
@@ -81,6 +82,12 @@ namespace boilersE2E.MsTest
         [TestInitialize]
         public void TestInitialize()
         {
+            var environmentVariable = Environment.GetEnvironmentVariable(boilersE2ETestEnvironmentVariableName);
+            if (wad is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
+            {
+                wad = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
+            }
+
             if (Session == null)
             {
                 var options = new AppiumOptions();
@@ -91,7 +98,6 @@ namespace boilersE2E.MsTest
 
                 DoAfterBoot();
 
-                var environmentVariable = Environment.GetEnvironmentVariable(boilersE2ETestEnvironmentVariableName);
                 if (environmentVariable == "true" || environmentVariable == 1.ToString())
                 {
                     Session.Manage().Window.Size = new Size(WindowSize.Width, WindowSize.Height);
