@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>net7.0-windows;net6.0-windows</TargetFrameworks>
+	  <TargetFrameworks>net7.0-windows10.0.22000.0;net6.0-windows10.0.22000.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
@@ -18,6 +18,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Xunit.StaFact" Version="1.1.11" />
+    <PackageReference Include="XunitRetry" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
