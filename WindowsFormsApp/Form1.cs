@@ -19,6 +19,8 @@ namespace WindowsFormsApp
         }
 
         private bool clearFlag = false;
+        private bool equalFlag = false;
+        private bool ctrlV = false;
 
         /// <summary>
         /// 引用：@mizu-kazu [C#] eval風 文字列式を演算する
@@ -71,71 +73,81 @@ namespace WindowsFormsApp
 
         private void zero_Click(object sender, EventArgs e)
         {
-            fomula.Text += "0";
             ClearDisplayIfFlagIsTrue();
+            ctrlV = false;
+            equalFlag = false;
             display.Text += "0";
         }
 
         private void one_Click(object sender, EventArgs e)
         {
-            fomula.Text += "1";
             ClearDisplayIfFlagIsTrue();
+            ctrlV = false;
+            equalFlag = false;
             display.Text += "1";
         }
 
         private void two_Click(object sender, EventArgs e)
         {
-            fomula.Text += "2";
             ClearDisplayIfFlagIsTrue();
+            ctrlV = false;
+            equalFlag = false;
             display.Text += "2";
         }
 
         private void three_Click(object sender, EventArgs e)
         {
-            fomula.Text += "3";
             ClearDisplayIfFlagIsTrue();
+            ctrlV = false;
+            equalFlag = false;
             display.Text += "3";
         }
 
         private void four_Click(object sender, EventArgs e)
         {
-            fomula.Text += "4";
             ClearDisplayIfFlagIsTrue();
+            ctrlV = false;
+            equalFlag = false;
             display.Text += "4";
         }
 
         private void five_Click(object sender, EventArgs e)
         {
-            fomula.Text += "5";
             ClearDisplayIfFlagIsTrue();
+            ctrlV = false;
+            equalFlag = false;
             display.Text += "5";
         }
 
         private void six_Click(object sender, EventArgs e)
         {
-            fomula.Text += "6";
             ClearDisplayIfFlagIsTrue();
+            ctrlV = false;
+            equalFlag = false;
             display.Text += "6";
         }
 
         private void seven_Click(object sender, EventArgs e)
         {
-            fomula.Text += "7";
             ClearDisplayIfFlagIsTrue();
+            ctrlV = false;
+            equalFlag = false;
             display.Text += "7";
         }
 
         private void eight_Click(object sender, EventArgs e)
         {
-            fomula.Text += "8";
             ClearDisplayIfFlagIsTrue();
+            ctrlV = false;
+            equalFlag = false;
             display.Text += "8";
         }
 
         private void nine_Click(object sender, EventArgs e)
         {
-            fomula.Text += "9";
             ClearDisplayIfFlagIsTrue();
+            ctrlV = false;
+            equalFlag = false;
             display.Text += "9";
         }
 
@@ -143,8 +155,8 @@ namespace WindowsFormsApp
         {
             if (int.TryParse(display.Text, out int i))
             {
-                fomula.Text += ".";
                 display.Text += ".";
+                ctrlV = false;
                 clearFlag = false;
             }
         }
@@ -153,40 +165,54 @@ namespace WindowsFormsApp
         {
             RemovePreviousAddedOperatorIfPreviousCharIsOperator();
             fomula.Text += "+";
+            ctrlV = false;
             clearFlag = true;
+            equalFlag = false;
         }
 
         private void minus_Click(object sender, EventArgs e)
         {
             RemovePreviousAddedOperatorIfPreviousCharIsOperator();
             fomula.Text += "-";
+            ctrlV = false;
             clearFlag = true;
+            equalFlag = false;
         }
 
         private void multiple_Click(object sender, EventArgs e)
         {
             RemovePreviousAddedOperatorIfPreviousCharIsOperator();
             fomula.Text += "×";
+            ctrlV = false;
             clearFlag = true;
+            equalFlag = false;
         }
 
         private void divide_Click(object sender, EventArgs e)
         {
             RemovePreviousAddedOperatorIfPreviousCharIsOperator();
             fomula.Text += "÷";
+            ctrlV = false;
             clearFlag = true;
+            equalFlag = false;
         }
 
         private void ClearEntry_Click(object sender, EventArgs e)
         {
             fomula.Text = string.Empty;
+            ctrlV = false;
+            equalFlag = true;
             display.Text = "0";
             clearFlag = true;
+            equalFlag = false;
         }
 
         private void equal_Click(object sender, EventArgs e)
         {
+            ctrlV = false;
+            equalFlag = true;
             display.Text = StrCalc<double>(fomula.Text.Replace("×", "*").Replace("÷", "/")).ToString();
+            equalFlag = false;
         }
 
         private void Clear_Click(object sender, EventArgs e)
@@ -194,8 +220,10 @@ namespace WindowsFormsApp
             if (fomula.Text.Length == 0)
                 return;
             fomula.Text = fomula.Text.Substring(0, fomula.Text.LastIndexOf(display.Text));
+            ctrlV = false;
             display.Text = "0";
             clearFlag = true;
+            equalFlag = false;
         }
 
         private void plusMinus_Click(object sender, EventArgs e)
@@ -236,6 +264,29 @@ namespace WindowsFormsApp
                 clearFlag = true;
             }
             fomula.Text = fomula.Text.Substring(0, fomula.Text.Length - 1);
+        }
+
+        private void display_TextChanged(object sender, EventArgs e)
+        {
+            if (equalFlag)
+                return;
+            var textbox = sender as TextBox;
+            if (ctrlV)
+            {
+                fomula.Text += textbox.Text;
+            }
+            else
+            {
+                if (textbox.Text.Length - 1 >= 0)
+                {
+                    fomula.Text += display.Text.Substring(display.Text.IndexOf(textbox.Text) + textbox.Text.Length - 1);
+                }
+            }
+        }
+
+        private void display_KeyDown(object sender, KeyEventArgs e)
+        {
+            ctrlV = e.Modifiers == Keys.Control && e.KeyCode == Keys.V;
         }
     }
 }

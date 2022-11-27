@@ -51,7 +51,7 @@ namespace WindowsFormsApp
             this.Clear = new System.Windows.Forms.Button();
             this.ClearEntry = new System.Windows.Forms.Button();
             this.backspace = new System.Windows.Forms.Button();
-            this.fomula = new UnfocusableTextbox();
+            this.fomula = new WindowsFormsApp.Controls.UnfocusableTextbox();
             this.SuspendLayout();
             // 
             // display
@@ -64,6 +64,8 @@ namespace WindowsFormsApp
             this.display.TabIndex = 0;
             this.display.Text = "0";
             this.display.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.display.TextChanged += new System.EventHandler(this.display_TextChanged);
+            this.display.KeyDown += new System.Windows.Forms.KeyEventHandler(this.display_KeyDown);
             // 
             // plusMinus
             // 
@@ -375,7 +377,7 @@ namespace WindowsFormsApp
         private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.Button ClearEntry;
         private System.Windows.Forms.Button backspace;
-        private System.Windows.Forms.TextBox fomula;
+        private UnfocusableTextbox fomula;
     }
 }
 
