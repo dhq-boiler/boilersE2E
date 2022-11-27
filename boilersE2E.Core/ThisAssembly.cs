@@ -4,4 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public partial class ThisAssembly { }
+public partial class ThisAssembly
+{
+}

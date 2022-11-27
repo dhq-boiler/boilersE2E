@@ -155,5 +155,20 @@ namespace boilersE2E.xUnit.Test
             Assert.Equal(string.Empty, Session.FindElementByAccessibilityId("fomula").Text);
             Assert.Equal("0", Session.FindElementByAccessibilityId("display").Text);
         }
+
+        [WpfFact]
+        public void Paste()
+        {
+            Assert.Equal("0", Session.FindElementByAccessibilityId("display").Text);
+
+            InputText(Session.FindElementByAccessibilityId("display"), "123456789");
+            Session.FindElementByAccessibilityId("plus").Click();
+            Session.FindElementByAccessibilityId("display").ClearRepeatedlyUntilTimeout();
+            InputText(Session.FindElementByAccessibilityId("display"), "987654321");
+            Session.FindElementByAccessibilityId("equal").Click();
+
+            Assert.Equal("123456789+987654321", Session.FindElementByAccessibilityId("fomula").Text);
+            Assert.Equal("1111111110", Session.FindElementByAccessibilityId("display").Text);
+        }
     }
 }

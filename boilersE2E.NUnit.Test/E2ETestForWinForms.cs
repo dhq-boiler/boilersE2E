@@ -153,14 +153,14 @@ namespace boilersE2E.NUnit.Test
             Assert.That(Session.FindElementByAccessibilityId("display").Text, Is.EqualTo("0"));
         }
 
-        [Test, Apartment(ApartmentState.STA)]
+        [Test, Apartment(ApartmentState.STA), Retry(3)]
         public void Paste()
         {
             Assert.That(Session.FindElementByAccessibilityId("display").Text, Is.EqualTo("0"));
 
             InputText(Session.FindElementByAccessibilityId("display"), "123456789");
             Session.FindElementByAccessibilityId("plus").Click();
-            Session.FindElementByAccessibilityId("display").Clear();
+            Session.FindElementByAccessibilityId("display").ClearRepeatedlyUntilTimeout();
             InputText(Session.FindElementByAccessibilityId("display"), "987654321");
             Session.FindElementByAccessibilityId("equal").Click();
 
