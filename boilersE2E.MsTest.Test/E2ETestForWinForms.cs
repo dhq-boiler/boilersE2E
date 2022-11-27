@@ -1,4 +1,5 @@
 using boilersE2E.MsTest;
+using MSTest.TestFramework.Extensions.AttributeEx;
 using System.Drawing;
 using System.Reflection;
 
@@ -155,14 +156,14 @@ namespace boilersE2E.MsTest.Test
             Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
         }
 
-        [STATestMethod]
+        [STATestMethod, Retry(3)]
         public void Paste()
         {
             Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
 
             InputText(Session.FindElementByAccessibilityId("display"), "123456789");
             Session.FindElementByAccessibilityId("plus").Click();
-            Session.FindElementByAccessibilityId("display").Clear();
+            Session.FindElementByAccessibilityId("display").ClearRepeatedlyUntilTimeout();
             InputText(Session.FindElementByAccessibilityId("display"), "987654321");
             Session.FindElementByAccessibilityId("equal").Click();
 
