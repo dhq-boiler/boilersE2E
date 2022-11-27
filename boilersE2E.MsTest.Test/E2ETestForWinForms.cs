@@ -154,5 +154,20 @@ namespace boilersE2E.MsTest.Test
             Assert.AreEqual(string.Empty, Session.FindElementByAccessibilityId("fomula").Text);
             Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
         }
+
+        [STATestMethod]
+        public void Paste()
+        {
+            Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
+
+            InputText(Session.FindElementByAccessibilityId("display"), "123456789");
+            Session.FindElementByAccessibilityId("plus").Click();
+            Session.FindElementByAccessibilityId("display").Clear();
+            InputText(Session.FindElementByAccessibilityId("display"), "987654321");
+            Session.FindElementByAccessibilityId("equal").Click();
+
+            Assert.AreEqual("123456789+987654321", Session.FindElementByAccessibilityId("fomula").Text);
+            Assert.AreEqual("1111111110", Session.FindElementByAccessibilityId("display").Text);
+        }
     }
 }
