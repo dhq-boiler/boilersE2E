@@ -30,7 +30,7 @@ boilersE2E は以下のライブラリから構成されます。
 
    [https://github.com/microsoft/WinAppDriver/releases](https://github.com/microsoft/WinAppDriver/releases)
 
-2. E2E テストプロジェクトを作成し、Nugetで boilersE2E を追加します。
+2. E2E テストプロジェクトを作成し、Nugetで boilersE2E.Core と boilersE2E.NUnit を追加します。
 
 3. boilersE2E.E2ETestFixture クラスを継承した任意のクラスを作成します。
 
