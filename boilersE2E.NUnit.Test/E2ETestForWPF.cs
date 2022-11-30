@@ -152,5 +152,20 @@ namespace boilersE2E.NUnit.Test
             Assert.That(Session.FindElementByAccessibilityId("fomula").Text, Is.EqualTo(string.Empty));
             Assert.That(Session.FindElementByAccessibilityId("display").Text, Is.EqualTo("0"));
         }
+
+        [Test, Apartment(ApartmentState.STA), Retry(3)]
+        public void Paste()
+        {
+            Assert.That(Session.FindElementByAccessibilityId("display").Text, Is.EqualTo("0"));
+
+            InputText(Session.FindElementByAccessibilityId("display"), "123456789");
+            Session.FindElementByAccessibilityId("plus").Click();
+            Session.FindElementByAccessibilityId("display").ClearRepeatedlyUntilTimeout();
+            InputText(Session.FindElementByAccessibilityId("display"), "987654321");
+            Session.FindElementByAccessibilityId("equal").Click();
+
+            Assert.That(Session.FindElementByAccessibilityId("fomula").Text, Is.EqualTo("123456789+987654321"));
+            Assert.That(Session.FindElementByAccessibilityId("display").Text, Is.EqualTo("1111111110"));
+        }
     }
 }

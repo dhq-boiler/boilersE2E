@@ -9,6 +9,9 @@ using System.Windows.Controls;
 using System;
 using Windows.Graphics;
 using System.Windows.Input;
+using System.Windows;
+using WPFApp.Views;
+using System.ComponentModel.Design;
 
 namespace WPFApp.ViewModels
 {
@@ -40,6 +43,7 @@ namespace WPFApp.ViewModels
         public ReactiveCommand DotCommand { get; } = new ReactiveCommand();
         public ReactiveCommand<TextChangedEventArgs> DisplayTextChangedCommand { get; } = new ReactiveCommand<TextChangedEventArgs>();
         public ReactiveCommand<KeyEventArgs> DisplayKeyDownCommand { get; } = new ReactiveCommand<KeyEventArgs>();
+        public ReactiveCommand ContentRenderedCommand { get; } = new ReactiveCommand();
 
         private bool clearFlag = true;
         private bool equalFlag = false;
@@ -47,8 +51,17 @@ namespace WPFApp.ViewModels
 
         public MainWindowViewModel()
         {
+            ContentRenderedCommand.Subscribe(() =>
+            {
+                var window = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w is MainWindow);
+                var mw = (MainWindow)window;
+                mw.display.Focus();
+                mw.display.SelectAll();
+            })
+            .AddTo(disposables);
             Fomula.Value = string.Empty;
             Display.Value = "0";
+            clearFlag = true;
             DisplayTextChangedCommand.Subscribe(e =>
             {
                 if (equalFlag)

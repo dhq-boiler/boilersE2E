@@ -10,6 +10,12 @@
     Title="WPF 電卓"
     SizeToContent="WidthAndHeight"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="ContentRendered">
+            <utils:EventToCommand Command="{Binding ContentRenderedCommand}"
+                                  PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">
@@ -43,13 +49,15 @@
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
-        <Label
+        <TextBox
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="4"
             AutomationProperties.AutomationId="fomula"
-            Content="{Binding Fomula.Value}" />
+            IsReadOnly="True"
+            Text="{Binding Fomula.Value}" />
         <TextBox
+            x:Name="display"
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="4"
