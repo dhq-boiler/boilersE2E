@@ -3,7 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:WPFApp"
+    xmlns:utils="clr-namespace:WPFApp.Utils"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="WPF 電卓"
     SizeToContent="WidthAndHeight"
@@ -52,7 +54,18 @@
             Grid.Column="0"
             Grid.ColumnSpan="4"
             AutomationProperties.AutomationId="display"
-            Text="{Binding Display.Value}" />
+            Text="{Binding Display.Value}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <utils:EventToCommand Command="{Binding DisplayTextChangedCommand}"
+                                          PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="PreviewKeyDown">
+                    <utils:EventToCommand Command="{Binding DisplayKeyDownCommand}"
+                                          PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
         <Button
             Grid.Row="2"
             Grid.Column="0"

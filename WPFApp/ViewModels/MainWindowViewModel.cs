@@ -5,6 +5,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Windows.Controls;
+using System;
+using Windows.Graphics;
+using System.Windows.Input;
 
 namespace WPFApp.ViewModels
 {
@@ -34,13 +38,40 @@ namespace WPFApp.ViewModels
         public ReactiveCommand NineCommand { get; } = new ReactiveCommand();
         public ReactiveCommand ZeroCommand { get; } = new ReactiveCommand();
         public ReactiveCommand DotCommand { get; } = new ReactiveCommand();
+        public ReactiveCommand<TextChangedEventArgs> DisplayTextChangedCommand { get; } = new ReactiveCommand<TextChangedEventArgs>();
+        public ReactiveCommand<KeyEventArgs> DisplayKeyDownCommand { get; } = new ReactiveCommand<KeyEventArgs>();
 
         private bool clearFlag = true;
+        private bool equalFlag = false;
+        private bool ctrlV = false;
 
         public MainWindowViewModel()
         {
             Fomula.Value = string.Empty;
             Display.Value = "0";
+            DisplayTextChangedCommand.Subscribe(e =>
+            {
+                if (equalFlag)
+                    return;
+                var textbox = e.Source as TextBox;
+                if (ctrlV)
+                {
+                    Fomula.Value += textbox.Text;
+                }
+                else
+                {
+                    if (textbox.Text.Length - 1 >= 0)
+                    {
+                        Fomula.Value += Display.Value.Substring(Display.Value.IndexOf(textbox.Text) + textbox.Text.Length - 1);
+                    }
+                }
+            })
+            .AddTo(disposables);
+            DisplayKeyDownCommand.Subscribe(e =>
+            {
+                ctrlV = ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) && e.Key == Key.V;
+            })
+            .AddTo(disposables);
             BackSpaceCommand.Subscribe(() =>
             {
                 if (Display.Value == "0")
@@ -57,8 +88,11 @@ namespace WPFApp.ViewModels
             ClearEntryCommand.Subscribe(() =>
             {
                 Fomula.Value = string.Empty;
+                ctrlV = false;
+                equalFlag = true;
                 Display.Value = "0";
                 clearFlag = true;
+                equalFlag = false;
             })
             .AddTo(disposables);
             ClearCommand.Subscribe(() =>
@@ -66,36 +100,46 @@ namespace WPFApp.ViewModels
                 if (Fomula.Value.Length == 0)
                     return;
                 Fomula.Value = Fomula.Value.Substring(0, Fomula.Value.LastIndexOf(Display.Value));
+                ctrlV = false;
                 Display.Value = "0";
                 clearFlag = true;
+                equalFlag = false;
             })
             .AddTo(disposables);
             DivideCommand.Subscribe(() =>
             {
                 RemovePreviousAddedOperatorIfPreviousCharIsOperator();
                 Fomula.Value += "÷";
+                ctrlV = false;
                 clearFlag = true;
+                equalFlag = false;
             })
             .AddTo(disposables);
             MultipleCommand.Subscribe(() =>
             {
                 RemovePreviousAddedOperatorIfPreviousCharIsOperator();
                 Fomula.Value += "×";
+                ctrlV = false;
                 clearFlag = true;
+                equalFlag = false;
             })
             .AddTo(disposables);
             MinusCommand.Subscribe(() =>
             {
                 RemovePreviousAddedOperatorIfPreviousCharIsOperator();
                 Fomula.Value += "-";
+                ctrlV = false;
                 clearFlag = true;
+                equalFlag = false;
             })
             .AddTo(disposables);
             PlusCommand.Subscribe(() =>
             {
                 RemovePreviousAddedOperatorIfPreviousCharIsOperator();
                 Fomula.Value += "+";
+                ctrlV = false;
                 clearFlag = true;
+                equalFlag = false;
             })
             .AddTo(disposables);
             PlusMinusCommand.Subscribe(() =>
@@ -127,76 +171,89 @@ namespace WPFApp.ViewModels
             .AddTo(disposables);
             EqualCommand.Subscribe(() =>
             {
+                ctrlV = false;
+                equalFlag = true;
                 Display.Value = StrCalc<double>(Fomula.Value.Replace("×", "*").Replace("÷", "/")).ToString();
+                equalFlag = false;
             })
             .AddTo(disposables);
             OneCommand.Subscribe(() =>
             {
-                Fomula.Value += "1";
                 ClearDisplayIfFlagIsTrue();
+                ctrlV = false;
+                equalFlag = false;
                 Display.Value += "1";
             })
             .AddTo(disposables);
             TwoCommand.Subscribe(() =>
             {
-                Fomula.Value += "2";
                 ClearDisplayIfFlagIsTrue();
+                ctrlV = false;
+                equalFlag = false;
                 Display.Value += "2";
             })
             .AddTo(disposables);
             ThreeCommand.Subscribe(() =>
             {
-                Fomula.Value += "3";
                 ClearDisplayIfFlagIsTrue();
+                ctrlV = false;
+                equalFlag = false;
                 Display.Value += "3";
             })
             .AddTo(disposables);
             FourCommand.Subscribe(() =>
             {
-                Fomula.Value += "4";
                 ClearDisplayIfFlagIsTrue();
+                ctrlV = false;
+                equalFlag = false;
                 Display.Value += "4";
             })
             .AddTo(disposables);
             FiveCommand.Subscribe(() =>
             {
-                Fomula.Value += "5";
                 ClearDisplayIfFlagIsTrue();
+                ctrlV = false;
+                equalFlag = false;
                 Display.Value += "5";
             })
             .AddTo(disposables);
             SixCommand.Subscribe(() =>
             {
-                Fomula.Value += "6";
                 ClearDisplayIfFlagIsTrue();
+                ctrlV = false;
+                equalFlag = false;
                 Display.Value += "6";
             })
             .AddTo(disposables);
             SevenCommand.Subscribe(() =>
             {
-                Fomula.Value += "7";
                 ClearDisplayIfFlagIsTrue();
+                ctrlV = false;
+                equalFlag = false;
                 Display.Value += "7";
             })
             .AddTo(disposables);
             EightCommand.Subscribe(() =>
             {
-                Fomula.Value += "8";
                 ClearDisplayIfFlagIsTrue();
+                ctrlV = false;
+                equalFlag = false;
                 Display.Value += "8";
             })
             .AddTo(disposables);
             NineCommand.Subscribe(() =>
             {
-                Fomula.Value += "9";
                 ClearDisplayIfFlagIsTrue();
+                ctrlV = false;
+                equalFlag = false;
                 Display.Value += "9";
             })
             .AddTo(disposables);
             ZeroCommand.Subscribe(() =>
             {
-                Fomula.Value += "0";
                 ClearDisplayIfFlagIsTrue();
+                ctrlV = false;
+                equalFlag = false;
                 Display.Value += "0";
             })
             .AddTo(disposables);
@@ -206,7 +263,8 @@ namespace WPFApp.ViewModels
                 {
                     Fomula.Value += ".";
                     Display.Value += ".";
-                    clearFlag = false;
+                    ctrlV = false;
+                    equalFlag = false;
                 }
             })
             .AddTo(disposables);
