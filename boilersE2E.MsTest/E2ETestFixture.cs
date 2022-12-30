@@ -46,6 +46,13 @@ namespace boilersE2E.MsTest
         }
 
         /// <summary>
+        /// TestInitializeメソッド内で、ウィンドウサイズを調整した後に任意の処理を実行します。
+        /// </summary>
+        public virtual void DoAfterSettingWindowSize()
+        {
+        }
+
+        /// <summary>
         /// ClassInitializeメソッド
         /// boilersE2ETestEnvironmentVariableNameで指定した環境変数の値が"1"または"true"の時、WinAppDriver.exeのプロセスを起動します。
         /// </summary>
@@ -104,8 +111,10 @@ namespace boilersE2E.MsTest
                 }
                 else
                 {
-                    Session.SwitchTo().Window(Session.WindowHandles.First()).Manage().Window.Maximize();
+                    MaximizeWindow();
                 }
+
+                DoAfterSettingWindowSize();
             }
         }
 
@@ -130,6 +139,16 @@ namespace boilersE2E.MsTest
                 Session.Quit();
                 Session = null;
             }
+        }
+
+        /// <summary>
+        /// 最前面にあるウィンドウを最大化します。
+        /// </summary>
+        public static void MaximizeWindow()
+        {
+            if (Session is null)
+                return;
+            Session.SwitchTo().Window(Session.WindowHandles.First()).Manage().Window.Maximize();
         }
 
         /// <summary>
