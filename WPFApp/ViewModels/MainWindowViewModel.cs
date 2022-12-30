@@ -274,7 +274,6 @@ namespace WPFApp.ViewModels
             {
                 if (int.TryParse(Display.Value, out int i))
                 {
-                    Fomula.Value += ".";
                     Display.Value += ".";
                     ctrlV = false;
                     equalFlag = false;
