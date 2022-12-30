@@ -24,6 +24,7 @@
 	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	<IsPackable>true</IsPackable>
+	<ThisAssemblyNamespace>boilersE2E.NUnit</ThisAssemblyNamespace>
   </PropertyGroup>
 	
   <ItemGroup>

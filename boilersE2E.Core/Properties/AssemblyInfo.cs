@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
@@ -32,15 +31,15 @@ using System.Runtime.InteropServices;
 // すべての値を指定するか、次を使用してビルド番号とリビジョン番号を既定に設定できます
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion(ThisAssembly.Git.BaseVersion.Major + "." + ThisAssembly.Git.BaseVersion.Minor + "." + ThisAssembly.Git.BaseVersion.Patch)]
+[assembly: AssemblyVersion(boilersE2E.Core.ThisAssembly.Git.BaseVersion.Major + "." + boilersE2E.Core.ThisAssembly.Git.BaseVersion.Minor + "." + boilersE2E.Core.ThisAssembly.Git.BaseVersion.Patch)]
 
-[assembly: AssemblyFileVersion(ThisAssembly.Git.SemVer.Major + "." + ThisAssembly.Git.SemVer.Minor + "." + ThisAssembly.Git.SemVer.Patch)]
+[assembly: AssemblyFileVersion(boilersE2E.Core.ThisAssembly.Git.SemVer.Major + "." + boilersE2E.Core.ThisAssembly.Git.SemVer.Minor + "." + boilersE2E.Core.ThisAssembly.Git.SemVer.Patch)]
 
 [assembly: AssemblyInformationalVersion(
     "v" +
-    ThisAssembly.Git.SemVer.Major + "." +
-    ThisAssembly.Git.SemVer.Minor + "." +
-    ThisAssembly.Git.SemVer.Patch + "." +
-    ThisAssembly.Git.Commits + "-" +
-    ThisAssembly.Git.Branch + "+" +
-    ThisAssembly.Git.Commit)]
+    boilersE2E.Core.ThisAssembly.Git.SemVer.Major + "." +
+    boilersE2E.Core.ThisAssembly.Git.SemVer.Minor + "." +
+    boilersE2E.Core.ThisAssembly.Git.SemVer.Patch + "." +
+    boilersE2E.Core.ThisAssembly.Git.Commits + "-" +
+    boilersE2E.Core.ThisAssembly.Git.Branch + "+" +
+    boilersE2E.Core.ThisAssembly.Git.Commit)]

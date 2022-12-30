@@ -33,15 +33,15 @@ using System.Windows.Controls;
 // すべての値を指定するか、次を使用してビルド番号とリビジョン番号を既定に設定できます
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion(ThisAssembly.Git.BaseVersion.Major + "." + ThisAssembly.Git.BaseVersion.Minor + "." + ThisAssembly.Git.BaseVersion.Patch)]
+[assembly: AssemblyVersion(boilersE2E.MsTest.ThisAssembly.Git.BaseVersion.Major + "." + boilersE2E.MsTest.ThisAssembly.Git.BaseVersion.Minor + "." + boilersE2E.MsTest.ThisAssembly.Git.BaseVersion.Patch)]
 
-[assembly: AssemblyFileVersion(ThisAssembly.Git.SemVer.Major + "." + ThisAssembly.Git.SemVer.Minor + "." + ThisAssembly.Git.SemVer.Patch)]
+[assembly: AssemblyFileVersion(boilersE2E.MsTest.ThisAssembly.Git.SemVer.Major + "." + boilersE2E.MsTest.ThisAssembly.Git.SemVer.Minor + "." + boilersE2E.MsTest.ThisAssembly.Git.SemVer.Patch)]
 
 [assembly: AssemblyInformationalVersion(
     "v" +
-    ThisAssembly.Git.SemVer.Major + "." +
-    ThisAssembly.Git.SemVer.Minor + "." +
-    ThisAssembly.Git.SemVer.Patch + "." +
-    ThisAssembly.Git.Commits + "-" +
-    ThisAssembly.Git.Branch + "+" +
-    ThisAssembly.Git.Commit)]
+    boilersE2E.MsTest.ThisAssembly.Git.SemVer.Major + "." +
+    boilersE2E.MsTest.ThisAssembly.Git.SemVer.Minor + "." +
+    boilersE2E.MsTest.ThisAssembly.Git.SemVer.Patch + "." +
+    boilersE2E.MsTest.ThisAssembly.Git.Commits + "-" +
+    boilersE2E.MsTest.ThisAssembly.Git.Branch + "+" +
+    boilersE2E.MsTest.ThisAssembly.Git.Commit)]
