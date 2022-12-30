@@ -21,7 +21,7 @@ namespace boilersE2E.xUnit
         public static WindowsDriver<WindowsElement> Session { get; private set; }
 
         /// <summary>
-        /// OneTimeSetUp, OneTimeTearDown時に取得する環境変数の変数名を指定します。
+        /// コンストラクタとDisposeメソッドで取得する環境変数の変数名を指定します。
         /// これは必須です。
         /// </summary>
         public static string boilersE2ETestEnvironmentVariableName { get; set; }
@@ -37,9 +37,16 @@ namespace boilersE2E.xUnit
         public abstract Size WindowSize { get; }
 
         /// <summary>
-        /// SetUpメソッド内でWindowsDriverオブジェクトを生成し、テストセッションを開始した後に任意の処理を実行します。
+        /// コンストラクタ内でWindowsDriverオブジェクトを生成し、テストセッションを開始した後に任意の処理を実行します。
         /// </summary>
         public virtual void DoAfterBoot()
+        {
+        }
+
+        /// <summary>
+        /// コンストラクタで、ウィンドウサイズを調整した後に任意の処理を実行します。
+        /// </summary>
+        public virtual void DoAfterSettingWindowSize()
         {
         }
 
@@ -67,8 +74,10 @@ namespace boilersE2E.xUnit
                 }
                 else
                 {
-                    Session.SwitchTo().Window(Session.WindowHandles.First()).Manage().Window.Maximize();
+                    MaximizeWindow();
                 }
+
+                DoAfterSettingWindowSize();
             }
         }
 
@@ -92,6 +101,16 @@ namespace boilersE2E.xUnit
                 Session.Quit();
                 Session = null;
             }
+        }
+
+        /// <summary>
+        /// 最前面にあるウィンドウを最大化します。
+        /// </summary>
+        public static void MaximizeWindow()
+        {
+            if (Session is null)
+                return;
+            Session.SwitchTo().Window(Session.WindowHandles.First()).Manage().Window.Maximize();
         }
 
         /// <summary>
