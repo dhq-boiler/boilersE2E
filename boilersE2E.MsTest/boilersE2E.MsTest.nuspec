@@ -19,4 +19,7 @@
 	  <file src="bin\Release\net7.0-windows10.0.22000.0\boilersE2E.MsTest.pdb"	target="lib\net7.0-windows10.0.22000.0" />
 	  <file src="**\*.cs" target="src" />
   </files>
+  <dependencies>
+  	  <dependency id="boilersE2E.Core" version="$version$" />
+  </dependencies>
 </package>
