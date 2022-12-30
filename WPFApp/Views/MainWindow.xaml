@@ -54,6 +54,8 @@
             Grid.Column="0"
             Grid.ColumnSpan="4"
             AutomationProperties.AutomationId="fomula"
+            BorderThickness="0"
+            FontSize="14"
             IsReadOnly="True"
             Text="{Binding Fomula.Value}" />
         <TextBox
