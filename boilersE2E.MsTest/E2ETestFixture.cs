@@ -27,14 +27,14 @@ namespace boilersE2E.MsTest
         /// 環境変数の値がtrueまたは1の場合は、WinAppDriver.exeを自動起動・自動終了します。
         /// 環境変数の値がそれ以外の値の場合は、WinAppDriver.exeを自動起動しません。このオプションはCIサーバーで別途WinAppDriverを実行している時に使用します。
         /// </summary>
-        public static string EnvironmentVariableNameWhereWinAppDriverRunAutomatically { get; set; }
+        public static string EnvironmentVariableNameWhereWinAppDriverRunAutomatically { get; set; } = "BOILERS_E2ETEST_WINAPPDRIVER_AUTORUN";
 
         /// <summary>
         /// ウィンドウサイズを手動でセットするかどうかの環境変数名です。
         /// 環境変数の値がtrueまたは1の場合は、WindowSizeプロパティのサイズで設定します。
         /// 環境変数の値がそれ以外の値の場合は、ウィンドウサイズを最大化します。
         /// </summary>
-        public static string EnvironmentVariableNameWhereSetWindowSizeManually { get; set; }
+        public static string EnvironmentVariableNameWhereSetWindowSizeManually { get; set; } = "BOILERS_E2ETEST_SET_WINDOWSIZE_MANUAL";
 
         /// <summary>
         /// テストするアプリケーションのパスを指定します。

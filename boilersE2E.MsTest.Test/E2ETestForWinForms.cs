@@ -14,6 +14,7 @@ namespace boilersE2E.MsTest.Test
         static E2ETestForWinForms()
         {
             EnvironmentVariableNameWhereWinAppDriverRunAutomatically = "BOILERS_E2ETEST_IS_VALID";
+            EnvironmentVariableNameWhereSetWindowSizeManually = "BOILERS_E2ETEST_SET_WINDOWSIZE_MANUAL";
         }
 
         [TestMethod]
