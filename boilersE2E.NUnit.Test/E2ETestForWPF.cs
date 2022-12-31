@@ -10,7 +10,7 @@ namespace boilersE2E.NUnit.Test
         public override Size WindowSize => new Size(571, 517);
         static E2ETestForWPF()
         {
-            boilersE2ETestEnvironmentVariableName = "BOILERS_E2ETEST_IS_VALID";
+            EnvironmentVariableNameWhereWinAppDriverRunAutomatically = "BOILERS_E2ETEST_IS_VALID";
         }
 
         [Test]

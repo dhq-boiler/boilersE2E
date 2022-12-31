@@ -13,7 +13,7 @@ namespace boilersE2E.MsTest.Test
         public override Size WindowSize => new Size(571, 517);
         static E2ETestForWinForms()
         {
-            boilersE2ETestEnvironmentVariableName = "BOILERS_E2ETEST_IS_VALID";
+            EnvironmentVariableNameWhereWinAppDriverRunAutomatically = "BOILERS_E2ETEST_IS_VALID";
         }
 
         [TestMethod]
