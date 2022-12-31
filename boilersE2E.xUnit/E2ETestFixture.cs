@@ -21,10 +21,18 @@ namespace boilersE2E.xUnit
         public static WindowsDriver<WindowsElement> Session { get; private set; }
 
         /// <summary>
-        /// コンストラクタとDisposeメソッドで取得する環境変数の変数名を指定します。
-        /// これは必須です。
+        /// WinAppDriver.exe を自動起動するかどうかの環境変数名です。
+        /// 環境変数の値がtrueまたは1の場合は、WinAppDriver.exeを自動起動・自動終了します。
+        /// 環境変数の値がそれ以外の値の場合は、WinAppDriver.exeを自動起動しません。このオプションはCIサーバーで別途WinAppDriverを実行している時に使用します。
         /// </summary>
-        public static string boilersE2ETestEnvironmentVariableName { get; set; }
+        public static string EnvironmentVariableNameWhereWinAppDriverRunAutomatically { get; set; }
+
+        /// <summary>
+        /// ウィンドウサイズを手動でセットするかどうかの環境変数名です。
+        /// 環境変数の値がtrueまたは1の場合は、WindowSizeプロパティのサイズで設定します。
+        /// 環境変数の値がそれ以外の値の場合は、ウィンドウサイズを最大化します。
+        /// </summary>
+        public static string EnvironmentVariableNameWhereSetWindowSizeManually { get; set; }
 
         /// <summary>
         /// テストするアプリケーションのパスを指定します。
@@ -67,7 +75,7 @@ namespace boilersE2E.xUnit
 
                 DoAfterBoot();
 
-                var environmentVariable = Environment.GetEnvironmentVariable(boilersE2ETestEnvironmentVariableName);
+                var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereSetWindowSizeManually);
                 if (environmentVariable == "true" || environmentVariable == 1.ToString())
                 {
                     Session.Manage().Window.Size = new Size(WindowSize.Width, WindowSize.Height);

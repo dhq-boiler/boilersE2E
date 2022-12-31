@@ -19,7 +19,7 @@ namespace boilersE2E.xUnit
         /// </summary>
         public E2ETestClass()
         {
-            var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixture.boilersE2ETestEnvironmentVariableName);
+            var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixture.EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
                 E2ETestFixture.wad = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
@@ -32,7 +32,7 @@ namespace boilersE2E.xUnit
         /// </summary>
         public void Dispose()
         {
-            var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixture.boilersE2ETestEnvironmentVariableName);
+            var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixture.EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
                 E2ETestFixture.wad.Kill();
