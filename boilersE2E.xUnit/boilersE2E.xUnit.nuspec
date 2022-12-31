@@ -20,6 +20,11 @@
 	  <file src="**\*.cs" target="src" />
   </files>
   <dependencies>
-	  <dependency id="boilersE2E.Core" version="3.1.3" />
+	  <group targetFramework=".NET6">
+		  <dependency id="boilersE2E.Core" version="4.0" />
+	  </group>
+	  <group targetFramework=".NET7">
+		  <dependency id="boilersE2E.Core" version="4.0" />
+	  </group>
   </dependencies>
 </package>
