@@ -334,8 +334,8 @@ namespace boilersE2E.xUnit
             }
         }
 
-        /// xUnit v3 になるまで使用不可。
         /// <summary>
+        /// xUnit v3 になるまで使用不可。
         /// スクリーンショットを撮影します。
         /// スクリーンショットの保存先ディレクトリは $(TargetDir) になります。
         /// </summary>

@@ -379,8 +379,16 @@ namespace boilersE2E.MsTest
         /// <param name="filename">撮影したスクリーンショットの保存ファイル名</param>
         public static void TakeScreenShot(string filename)
         {
-            Session.GetScreenshot().SaveAsFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
-            s_testContext.AddResultFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
+            try
+            {
+                Session.GetScreenshot().SaveAsFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
+                s_testContext.AddResultFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
+            }
+            catch (WebDriverException e)
+            {
+                s_logger.Warn("Failed to TakeScreenShot method.");
+                s_logger.Warn(e);
+            }
         }
     }
 }
