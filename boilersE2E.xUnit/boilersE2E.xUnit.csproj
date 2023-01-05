@@ -13,6 +13,7 @@
 	<NuspecProperties>$(NuspecProperties);version=$(PackageVersion)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);id=$(PackageId)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);author=$(Authors)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);license=$(license)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);PackageProjectUrl=$(PackageProjectUrl)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);Description=$(Description)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);PackageReleaseNotes=$(PackageReleaseNotes)</NuspecProperties>
@@ -20,6 +21,8 @@
 	<NuspecProperties>$(NuspecProperties);PackageTags=$(PackageTags)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);RepositoryType=$(RepositoryType)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);RepositoryUrl=$(RepositoryUrl)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);Files=$(Files)</NuspecProperties>
+	<NuspecProperties>$(NuspecProperties);Dependencies=$(Dependencies)</NuspecProperties>
 	<IncludeSymbols>true</IncludeSymbols>
 	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
