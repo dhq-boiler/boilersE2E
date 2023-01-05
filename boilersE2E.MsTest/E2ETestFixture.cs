@@ -18,7 +18,7 @@ namespace boilersE2E.MsTest
         private static readonly Logger s_logger = LogManager.GetCurrentClassLogger();
         private static Process wad;
 
-        private static TestContext s_testContext;
+        public TestContext TestContext { get; internal set; }
 
         protected static WindowsDriver<WindowsElement> Session { get; private set; }
 
@@ -67,7 +67,6 @@ namespace boilersE2E.MsTest
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            E2ETestFixture.s_testContext = testContext;
             var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (wad is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
             {
@@ -137,6 +136,13 @@ namespace boilersE2E.MsTest
         {
             if (Session != null)
             {
+                //テストが失敗した時
+                if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
+                {
+                    //スクリーンショットを撮影する
+                    TakeScreenShot($"{TestContext.FullyQualifiedTestClassName}.{TestContext.TestName}.png");
+                }
+
                 while (Session.WindowHandles.Count() > 0)
                 {
                     //Alt+F4によるアプリ終了
@@ -386,12 +392,12 @@ namespace boilersE2E.MsTest
         /// スクリーンショットの保存先ディレクトリは $(TargetDir) になります。
         /// </summary>
         /// <param name="filename">撮影したスクリーンショットの保存ファイル名</param>
-        public static void TakeScreenShot(string filename)
+        public void TakeScreenShot(string filename)
         {
             try
             {
                 Session.GetScreenshot().SaveAsFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
-                s_testContext.AddResultFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
+                TestContext.AddResultFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
             }
             catch (WebDriverException e)
             {

@@ -1,5 +1,6 @@
 using NLog;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
@@ -127,6 +128,13 @@ namespace boilersE2E.NUnit
         {
             if (Session != null)
             {
+                //テストが失敗した時
+                if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+                {
+                    //スクリーンショットを撮影する
+                    TakeScreenShot($"{TestContext.CurrentContext.Test.FullName}.png");
+                }
+
                 while (Session.WindowHandles.Count() > 0)
                 {
                     //Alt+F4によるアプリ終了
