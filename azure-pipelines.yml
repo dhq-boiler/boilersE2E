@@ -68,11 +68,12 @@ steps:
     command: custom
     custom: pack
     arguments: '-p:NuspecFile=boilersE2E.Core/boilersE2E.Core.nuspec --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
-    packagesToPack: 'boilersE2E.Core/boilersE2E.Core.csproj'
-    nobuild: true
-    includesymbols: true
-    includesource: true
-    versioningScheme: 'off'
+    projects: 'boilersE2E.Core/boilersE2E.Core.csproj'
+    #packagesToPack: 'boilersE2E.Core/boilersE2E.Core.csproj'
+    #nobuild: true
+    #includesymbols: true
+    #includesource: true
+    #versioningScheme: 'off'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
 - task: DotNetCoreCLI@2
@@ -81,11 +82,12 @@ steps:
     command: custom
     custom: pack
     arguments: '-p:NuspecFile=boilersE2E.MsTest/boilersE2E.MsTest.nuspec --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
-    packagesToPack: 'boilersE2E.MsTest/boilersE2E.MsTest.csproj'
-    nobuild: true
-    includesymbols: true
-    includesource: true
-    versioningScheme: 'off'
+    projects: 'boilersE2E.MsTest/boilersE2E.MsTest.csproj'
+    #packagesToPack: 'boilersE2E.MsTest/boilersE2E.MsTest.csproj'
+    #nobuild: true
+    #includesymbols: true
+    #includesource: true
+    #versioningScheme: 'off'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
 - task: DotNetCoreCLI@2
@@ -94,11 +96,12 @@ steps:
     command: custom
     custom: pack
     arguments: '-p:NuspecFile=boilersE2E.NUnit/boilersE2E.NUnit.nuspec --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
-    packagesToPack: 'boilersE2E.NUnit/boilersE2E.NUnit.csproj'
-    nobuild: true
-    includesymbols: true
-    includesource: true
-    versioningScheme: 'off'
+    projects: 'boilersE2E.NUnit/boilersE2E.NUnit.csproj'
+    #packagesToPack: 'boilersE2E.NUnit/boilersE2E.NUnit.csproj'
+    #nobuild: true
+    #includesymbols: true
+    #includesource: true
+    #versioningScheme: 'off'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
 - task: DotNetCoreCLI@2
@@ -107,11 +110,12 @@ steps:
     command: custom
     custom: pack
     arguments: '-p:NuspecFile=boilersE2E.xUnit/boilersE2E.xUnit.nuspec --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
-    packagesToPack: 'boilersE2E.xUnit/boilersE2E.xUnit.csproj'
-    nobuild: true
-    includesymbols: true
-    includesource: true
-    versioningScheme: 'off'
+    projects: 'boilersE2E.xUnit/boilersE2E.xUnit.csproj'
+    #packagesToPack: 'boilersE2E.xUnit/boilersE2E.xUnit.csproj'
+    #nobuild: true
+    #includesymbols: true
+    #includesource: true
+    #versioningScheme: 'off'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
 - task: PublishBuildArtifacts@1
