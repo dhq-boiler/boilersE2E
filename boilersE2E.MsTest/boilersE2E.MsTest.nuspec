@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>boilersE2E.MsTest</id>
-	<version>$version$</version>
+	<version>THIS_EXTENSION_SET_THIS_FIELD</version>
     <authors>dhq_boiler</authors>
     <owners>dhq_boiler</owners>
 	<projectUrl>https://github.com/dhq-boiler/boilersE2E</projectUrl>
