@@ -65,7 +65,8 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'pack boilersE2E.Core'
   inputs:
-    command: 'pack'
+    command: custom
+    custom: pack
     arguments: '-p:NuspecFile=boilersE2E.Core/boilersE2E.Core.nuspec'
     packagesToPack: 'boilersE2E.Core/boilersE2E.Core.csproj'
     nobuild: true
@@ -77,7 +78,8 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'pack boilersE2E.MsTest'
   inputs:
-    command: 'pack'
+    command: custom
+    custom: pack
     arguments: '-p:NuspecFile=boilersE2E.MsTest/boilersE2E.MsTest.nuspec'
     packagesToPack: 'boilersE2E.MsTest/boilersE2E.MsTest.csproj'
     nobuild: true
@@ -89,7 +91,8 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'pack boilersE2E.NUnit'
   inputs:
-    command: 'pack'
+    command: custom
+    custom: pack
     arguments: '-p:NuspecFile=boilersE2E.NUnit/boilersE2E.NUnit.nuspec'
     packagesToPack: 'boilersE2E.NUnit/boilersE2E.NUnit.csproj'
     nobuild: true
@@ -101,7 +104,8 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'pack boilersE2E.xUnit'
   inputs:
-    command: 'pack'
+    command: custom
+    custom: pack
     arguments: '-p:NuspecFile=boilersE2E.xUnit/boilersE2E.xUnit.nuspec'
     packagesToPack: 'boilersE2E.xUnit/boilersE2E.xUnit.csproj'
     nobuild: true
