@@ -66,6 +66,30 @@ steps:
   displayName: 'tree $(Build.ArtifactStagingDirectory) /F'
   inputs:
     script: 'tree $(Build.ArtifactStagingDirectory) /F'
+    
+- task: NugetVersionSynchronizer@0
+  inputs:
+    dropFolderPath: '$(Build.SourcesDirectory)'
+    nuspecFileName: 'boilersE2E.Core/boilersE2E.Core.nuspec'
+    modelVersionFileName: '$(Build.SourcesDirectory)/boilersE2E.Core/bin/$(BuildConfiguration)/net7.0-windows10.0.22000.0/boilersE2E.Core.dll'
+
+- task: NugetVersionSynchronizer@0
+  inputs:
+    dropFolderPath: '$(Build.SourcesDirectory)'
+    nuspecFileName: 'boilersE2E.MsTest/boilersE2E.MsTest.nuspec'
+    modelVersionFileName: '$(Build.SourcesDirectory)/boilersE2E.MsTest/bin/$(BuildConfiguration)/net7.0-windows10.0.22000.0/boilersE2E.MsTest.dll'
+
+- task: NugetVersionSynchronizer@0
+  inputs:
+    dropFolderPath: '$(Build.SourcesDirectory)'
+    nuspecFileName: 'boilersE2E.NUnit/boilersE2E.NUnit.nuspec'
+    modelVersionFileName: '$(Build.SourcesDirectory)/boilersE2E.NUnit/bin/$(BuildConfiguration)/net7.0-windows10.0.22000.0/boilersE2E.NUnit.dll'
+
+- task: NugetVersionSynchronizer@0
+  inputs:
+    dropFolderPath: '$(Build.SourcesDirectory)'
+    nuspecFileName: 'boilersE2E.xUnit/boilersE2E.xUnit.nuspec'
+    modelVersionFileName: '$(Build.SourcesDirectory)/boilersE2E.xUnit/bin/$(BuildConfiguration)/net7.0-windows10.0.22000.0/boilersE2E.xUnit.dll'
 
 - task: DotNetCoreCLI@2
   displayName: 'pack boilersE2E.Core'
