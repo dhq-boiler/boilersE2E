@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>boilersE2E.NUnit</id>
-	<version>1.0.0</version>
+	<version>$version$</version>
     <authors>dhq_boiler</authors>
     <owners>dhq_boiler</owners>
 	<projectUrl>https://github.com/dhq-boiler/boilersE2E</projectUrl>
