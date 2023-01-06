@@ -8,7 +8,6 @@
 	<UseWPF>true</UseWPF>
 	<UseWindowsForms>true</UseWindowsForms>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	<NuspecFile>boilersE2E.xUnit.nuspec</NuspecFile>
 	<NuspecProperties>$(NuspecProperties);configuration=$(Configuration)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);version=$(PackageVersion)</NuspecProperties>
 	<NuspecProperties>$(NuspecProperties);id=$(PackageId)</NuspecProperties>
