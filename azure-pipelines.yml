@@ -72,8 +72,8 @@ steps:
   inputs:
     command: custom
     custom: pack
-    arguments: '-p:NuspecFile="boilersE2E.Core/boilersE2E.Core.nuspec" --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
-    projects: 'boilersE2E.Core/boilersE2E.Core.csproj'
+    arguments: '-p:NuspecFile="$(Build.SourcesDirectory)/boilersE2E.Core/boilersE2E.Core.nuspec" --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
+    projects: '$(Build.SourcesDirectory)/boilersE2E.Core/boilersE2E.Core.csproj'
     #packagesToPack: 'boilersE2E.Core/boilersE2E.Core.csproj'
     #nobuild: true
     #includesymbols: true
@@ -86,8 +86,8 @@ steps:
   inputs:
     command: custom
     custom: pack
-    arguments: '-p:NuspecFile="boilersE2E.MsTest/boilersE2E.MsTest.nuspec" --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
-    projects: 'boilersE2E.MsTest/boilersE2E.MsTest.csproj'
+    arguments: '-p:NuspecFile="$(Build.SourcesDirectory)/boilersE2E.MsTest/boilersE2E.MsTest.nuspec" --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
+    projects: '$(Build.SourcesDirectory)/boilersE2E.MsTest/boilersE2E.MsTest.csproj'
     #packagesToPack: 'boilersE2E.MsTest/boilersE2E.MsTest.csproj'
     #nobuild: true
     #includesymbols: true
@@ -100,8 +100,8 @@ steps:
   inputs:
     command: custom
     custom: pack
-    arguments: '-p:NuspecFile="boilersE2E.NUnit/boilersE2E.NUnit.nuspec" --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
-    projects: 'boilersE2E.NUnit/boilersE2E.NUnit.csproj'
+    arguments: '-p:NuspecFile="$(Build.SourcesDirectory)/boilersE2E.NUnit/boilersE2E.NUnit.nuspec" --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
+    projects: '$(Build.SourcesDirectory)/boilersE2E.NUnit/boilersE2E.NUnit.csproj'
     #packagesToPack: 'boilersE2E.NUnit/boilersE2E.NUnit.csproj'
     #nobuild: true
     #includesymbols: true
@@ -114,8 +114,8 @@ steps:
   inputs:
     command: custom
     custom: pack
-    arguments: '-p:NuspecFile="boilersE2E.xUnit/boilersE2E.xUnit.nuspec" --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
-    projects: 'boilersE2E.xUnit/boilersE2E.xUnit.csproj'
+    arguments: '-p:NuspecFile="$(Build.SourcesDirectory)/boilersE2E.xUnit/boilersE2E.xUnit.nuspec" --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
+    projects: '$(Build.SourcesDirectory)/boilersE2E.xUnit/boilersE2E.xUnit.csproj'
     #packagesToPack: 'boilersE2E.xUnit/boilersE2E.xUnit.csproj'
     #nobuild: true
     #includesymbols: true
