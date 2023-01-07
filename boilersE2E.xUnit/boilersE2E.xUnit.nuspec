@@ -20,10 +20,10 @@
 	  <file src="**\*.cs" target="src" />
   </files>
   <dependencies>
-	<group targetFramework="net6.0">
+	<group targetFramework="net6.0-windows10.0.22000.0">
 	  <dependency id="boilersE2E.Core" version="4.0" />
 	</group>
-	<group targetFramework="net7.0">
+	<group targetFramework="net7.0-windows10.0.22000.0">
 	  <dependency id="boilersE2E.Core" version="4.0" />
 	</group>
   </dependencies>
