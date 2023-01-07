@@ -182,5 +182,6 @@ steps:
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.snupkg'
+    nuGetFeedType: external
     publishFeedCredentials: 'boilersE2E-NuGet'
     allowPackageConflicts: true
