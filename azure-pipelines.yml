@@ -67,6 +67,23 @@ steps:
   inputs:
     script: 'tree $(Build.ArtifactStagingDirectory) /F'
     
+- task: CmdLine@2
+  displayName: more boilersE2E.Core.nuspec
+  inputs:
+    script: 'more $(Build.SourcesDirectory)/boilersE2E.Core/boilersE2E.Core.nuspec'
+- task: CmdLine@2
+  displayName: more boilersE2E.MsTest.nuspec
+  inputs:
+    script: 'more $(Build.SourcesDirectory)/boilersE2E.MsTest/boilersE2E.MsTest.nuspec'
+- task: CmdLine@2
+  displayName: more boilersE2E.NUnit.nuspec
+  inputs:
+    script: 'more $(Build.SourcesDirectory)/boilersE2E.NUnit/boilersE2E.NUnit.nuspec'
+- task: CmdLine@2
+  displayName: more boilersE2E.xUnit.nuspec
+  inputs:
+    script: 'more $(Build.SourcesDirectory)/boilersE2E.xUnit/boilersE2E.xUnit.nuspec'
+
 - task: NugetVersionSynchronizer@0
   inputs:
     dropFolderPath: '$(Build.SourcesDirectory)'
@@ -91,6 +108,23 @@ steps:
     nuspecFileName: 'boilersE2E.xUnit/boilersE2E.xUnit.nuspec'
     modelVersionFileName: '$(Build.SourcesDirectory)/boilersE2E.xUnit/bin/$(BuildConfiguration)/net7.0-windows10.0.22000.0/boilersE2E.xUnit.dll'
 
+- task: CmdLine@2
+  displayName: more boilersE2E.Core.nuspec
+  inputs:
+    script: 'more $(Build.SourcesDirectory)/boilersE2E.Core/boilersE2E.Core.nuspec'
+- task: CmdLine@2
+  displayName: more boilersE2E.MsTest.nuspec
+  inputs:
+    script: 'more $(Build.SourcesDirectory)/boilersE2E.MsTest/boilersE2E.MsTest.nuspec'
+- task: CmdLine@2
+  displayName: more boilersE2E.NUnit.nuspec
+  inputs:
+    script: 'more $(Build.SourcesDirectory)/boilersE2E.NUnit/boilersE2E.NUnit.nuspec'
+- task: CmdLine@2
+  displayName: more boilersE2E.xUnit.nuspec
+  inputs:
+    script: 'more $(Build.SourcesDirectory)/boilersE2E.xUnit/boilersE2E.xUnit.nuspec'
+    
 - task: DotNetCoreCLI@2
   displayName: 'pack boilersE2E.Core'
   inputs:
@@ -98,11 +132,6 @@ steps:
     custom: pack
     arguments: '-p:NuspecFile=boilersE2E.Core.nuspec --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
     projects: '$(Build.SourcesDirectory)/boilersE2E.Core/boilersE2E.Core.csproj'
-    #packagesToPack: 'boilersE2E.Core/boilersE2E.Core.csproj'
-    #nobuild: true
-    #includesymbols: true
-    #includesource: true
-    #versioningScheme: 'off'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
 - task: DotNetCoreCLI@2
@@ -112,11 +141,6 @@ steps:
     custom: pack
     arguments: '-p:NuspecFile=boilersE2E.MsTest.nuspec --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
     projects: '$(Build.SourcesDirectory)/boilersE2E.MsTest/boilersE2E.MsTest.csproj'
-    #packagesToPack: 'boilersE2E.MsTest/boilersE2E.MsTest.csproj'
-    #nobuild: true
-    #includesymbols: true
-    #includesource: true
-    #versioningScheme: 'off'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
 - task: DotNetCoreCLI@2
@@ -126,11 +150,6 @@ steps:
     custom: pack
     arguments: '-p:NuspecFile=boilersE2E.NUnit.nuspec --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
     projects: '$(Build.SourcesDirectory)/boilersE2E.NUnit/boilersE2E.NUnit.csproj'
-    #packagesToPack: 'boilersE2E.NUnit/boilersE2E.NUnit.csproj'
-    #nobuild: true
-    #includesymbols: true
-    #includesource: true
-    #versioningScheme: 'off'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
 - task: DotNetCoreCLI@2
@@ -140,11 +159,6 @@ steps:
     custom: pack
     arguments: '-p:NuspecFile=boilersE2E.xUnit.nuspec --output $(Build.ArtifactStagingDirectory) --no-build --include-symbols --include-source /p:Configuration=Release --verbosity Detailed'
     projects: '$(Build.SourcesDirectory)/boilersE2E.xUnit/boilersE2E.xUnit.csproj'
-    #packagesToPack: 'boilersE2E.xUnit/boilersE2E.xUnit.csproj'
-    #nobuild: true
-    #includesymbols: true
-    #includesource: true
-    #versioningScheme: 'off'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
 - task: PublishBuildArtifacts@1
@@ -154,8 +168,17 @@ steps:
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
   
 - task: NuGetCommand@2
+  displayName: 'push nupkg'
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'boilersE2E-NuGet'
+
+- task: NuGetCommand@2
+  displayName: 'push snupkg'
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.snupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'boilersE2E-NuGet'
