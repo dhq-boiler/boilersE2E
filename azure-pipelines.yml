@@ -177,21 +177,9 @@ steps:
     nuGetFeedType: 'external'
     publishFeedCredentials: 'boilersE2E-NuGet'
 
-#- task: NuGetCommand@2
-#  displayName: 'push snupkg'
-#  inputs:
-#    command: 'push'
-#    arguments: '-SkipDuplicate'
-#    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.snupkg'
-#    nuGetFeedType: 'external'
-#    publishFeedCredentials: 'boilersE2E-NuGet'
-
 - task: DotNetCoreCLI@2
   displayName: 'push snupkg'
   inputs:
     command: custom
-    custom: push
-    arguments: '-SkipDuplicate'
-    searchPatternPush: '$(Build.ArtifactStagingDirectory)/**/*.snupkg'
-    nugetFeedType: external
-    externalEndPoint: 'boilersE2E-NuGet'
+    custom: nuget
+    arguments: 'push $(Build.ArtifactStagingDirectory)/**/*.snupkg -s https://api.nuget.org/v3/index.json --skip-duplicate'
