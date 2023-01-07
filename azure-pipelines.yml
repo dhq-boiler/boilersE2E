@@ -187,5 +187,5 @@ steps:
 #    publishFeedCredentials: 'boilersE2E-NuGet'
 #    allowPackageConflicts: true
 
-- script: nuget push $(Build.ArtifactStagingDirectory)/**/*.snupkg -Source $(nugetSource) -ApiKey $(nuget.apikey) -SkipDuplicate
+- script: nuget push $(Build.ArtifactStagingDirectory)/**/*.snupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(nuget.apikey) -SkipDuplicate
   displayName: 'Push to NuGet.org'
