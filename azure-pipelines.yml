@@ -181,6 +181,7 @@ steps:
   displayName: 'push snupkg'
   inputs:
     command: 'push'
+    arguments: '-SkipDuplicate'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.snupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'boilersE2E-NuGet'
