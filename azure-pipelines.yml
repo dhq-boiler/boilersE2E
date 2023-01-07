@@ -45,16 +45,16 @@ steps:
     OperationType: 'Start'
     AgentResolution: '1080p'
 
-#- task: DotNetCoreCLI@2
-#  displayName: 'dotnet test'
-#  inputs:
-#    command: 'test'
-#    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura -- RunConfiguration.DisableAppDomain=true'
-#    publishTestResults: true
-#    projects: |
-#      boilersE2E.xUnit.Test
-#      boilersE2E.NUnit.Test
-#      boilersE2E.MsTest.Test
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura -- RunConfiguration.DisableAppDomain=true'
+    publishTestResults: true
+    projects: |
+      boilersE2E.xUnit.Test
+      boilersE2E.NUnit.Test
+      boilersE2E.MsTest.Test
 
 - task: Windows Application Driver@0
   condition: always()
@@ -65,28 +65,6 @@ steps:
   displayName: 'PowerShell Script'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
   
-- task: CmdLine@2
-  displayName: 'tree $(Build.ArtifactStagingDirectory) /F'
-  inputs:
-    script: 'tree $(Build.ArtifactStagingDirectory) /F'
-    
-- task: CmdLine@2
-  displayName: more boilersE2E.Core.nuspec
-  inputs:
-    script: 'more $(Build.SourcesDirectory)\boilersE2E.Core\boilersE2E.Core.nuspec'
-- task: CmdLine@2
-  displayName: more boilersE2E.MsTest.nuspec
-  inputs:
-    script: 'more $(Build.SourcesDirectory)\boilersE2E.MsTest\boilersE2E.MsTest.nuspec'
-- task: CmdLine@2
-  displayName: more boilersE2E.NUnit.nuspec
-  inputs:
-    script: 'more $(Build.SourcesDirectory)\boilersE2E.NUnit\boilersE2E.NUnit.nuspec'
-- task: CmdLine@2
-  displayName: more boilersE2E.xUnit.nuspec
-  inputs:
-    script: 'more $(Build.SourcesDirectory)\boilersE2E.xUnit\boilersE2E.xUnit.nuspec'
-
 - task: NugetVersionSynchronizer@0
   inputs:
     dropFolderPath: '$(Build.SourcesDirectory)'
@@ -110,23 +88,6 @@ steps:
     dropFolderPath: '$(Build.SourcesDirectory)'
     nuspecFileName: 'boilersE2E.xUnit/boilersE2E.xUnit.nuspec'
     modelVersionFileName: '$(Build.SourcesDirectory)/boilersE2E.xUnit/bin/$(BuildConfiguration)/net7.0-windows10.0.22000.0/boilersE2E.xUnit.dll'
-
-- task: CmdLine@2
-  displayName: more boilersE2E.Core.nuspec
-  inputs:
-    script: 'more $(Build.SourcesDirectory)\boilersE2E.Core\boilersE2E.Core.nuspec'
-- task: CmdLine@2
-  displayName: more boilersE2E.MsTest.nuspec
-  inputs:
-    script: 'more $(Build.SourcesDirectory)\boilersE2E.MsTest\boilersE2E.MsTest.nuspec'
-- task: CmdLine@2
-  displayName: more boilersE2E.NUnit.nuspec
-  inputs:
-    script: 'more $(Build.SourcesDirectory)\boilersE2E.NUnit\boilersE2E.NUnit.nuspec'
-- task: CmdLine@2
-  displayName: more boilersE2E.xUnit.nuspec
-  inputs:
-    script: 'more $(Build.SourcesDirectory)\boilersE2E.xUnit\boilersE2E.xUnit.nuspec'
     
 - task: DotNetCoreCLI@2
   displayName: 'pack boilersE2E.Core'
@@ -177,15 +138,6 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'boilersE2E-NuGet'
-
-#- task: NuGetCommand@2
-#  displayName: 'push snupkg'
-#  inputs:
-#    command: 'push'
-#    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.snupkg'
-#    nuGetFeedType: external
-#    publishFeedCredentials: 'boilersE2E-NuGet'
-#    allowPackageConflicts: true
 
 - script: nuget push $(Build.ArtifactStagingDirectory)/**/*.snupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(nuget.apikey) -SkipDuplicate
   displayName: 'push snupkg'
