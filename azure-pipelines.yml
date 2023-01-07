@@ -33,6 +33,7 @@ steps:
     includePreviewVersions: true
     
 - task: NuGetToolInstaller@1
+  displayName: 'Install NuGet'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
@@ -177,11 +178,14 @@ steps:
     nuGetFeedType: 'external'
     publishFeedCredentials: 'boilersE2E-NuGet'
 
-- task: NuGetCommand@2
-  displayName: 'push snupkg'
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.snupkg'
-    nuGetFeedType: external
-    publishFeedCredentials: 'boilersE2E-NuGet'
-    allowPackageConflicts: true
+#- task: NuGetCommand@2
+#  displayName: 'push snupkg'
+#  inputs:
+#    command: 'push'
+#    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.snupkg'
+#    nuGetFeedType: external
+#    publishFeedCredentials: 'boilersE2E-NuGet'
+#    allowPackageConflicts: true
+
+- script: nuget push $(Build.ArtifactStagingDirectory)/**/*.snupkg -Source $(nugetSource) -ApiKey $(nuget.apikey) -SkipDuplicate
+  displayName: 'Push to NuGet.org'
