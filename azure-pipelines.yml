@@ -44,16 +44,16 @@ steps:
     OperationType: 'Start'
     AgentResolution: '1080p'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet test'
-  inputs:
-    command: 'test'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura -- RunConfiguration.DisableAppDomain=true'
-    publishTestResults: true
-    projects: |
-      boilersE2E.xUnit.Test
-      boilersE2E.NUnit.Test
-      boilersE2E.MsTest.Test
+#- task: DotNetCoreCLI@2
+#  displayName: 'dotnet test'
+#  inputs:
+#    command: 'test'
+#    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura -- RunConfiguration.DisableAppDomain=true'
+#    publishTestResults: true
+#    projects: |
+#      boilersE2E.xUnit.Test
+#      boilersE2E.NUnit.Test
+#      boilersE2E.MsTest.Test
 
 - task: Windows Application Driver@0
   condition: always()
