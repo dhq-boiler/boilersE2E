@@ -96,10 +96,7 @@ namespace boilersE2E.NUnit
         {
             if (Session == null)
             {
-                var options = new AppiumOptions();
-                options.AddAdditionalCapability("app", AppPath);
-                options.AddAdditionalCapability("appWorkingDir", Path.GetDirectoryName(AppPath));
-                Session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), options);
+                CreateSession();
                 Assert.That(Session, Is.Not.Null);
 
                 DoAfterBoot();
@@ -135,16 +132,7 @@ namespace boilersE2E.NUnit
                     TakeScreenShot($"{TestContext.CurrentContext.Test.FullName}.png");
                 }
 
-                while (Session.WindowHandles.Count() > 0)
-                {
-                    //Alt+F4によるアプリ終了
-                    var actions = new Actions(Session);
-                    actions.SendKeys(OpenQA.Selenium.Keys.Alt + OpenQA.Selenium.Keys.F4 + OpenQA.Selenium.Keys.Alt);
-                    actions.Perform();
-                }
-                Session.WindowHandles.Select(x => Session.SwitchTo().Window(x)).ToList().ForEach(x => x.Dispose());
-                Session.Quit();
-                Session = null;
+                QuitTargetApp();
             }
         }
 
@@ -396,6 +384,51 @@ namespace boilersE2E.NUnit
                 s_logger.Warn("Failed to TakeScreenShot method.");
                 s_logger.Warn(e);
             }
+        }
+
+        private void CreateSession()
+        {
+            var options = new AppiumOptions();
+            options.AddAdditionalCapability("app", AppPath);
+            options.AddAdditionalCapability("appWorkingDir", Path.GetDirectoryName(AppPath));
+            try
+            {
+                Session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), options);
+            }
+            catch (WebDriverException e)
+            {
+                QuitTargetApp();
+                RebootWinAppDriver();
+                CreateSession();
+            }
+            Assert.That(Session, Is.Not.Null);
+        }
+
+        private static void QuitTargetApp()
+        {
+            while (Session.WindowHandles.Count() > 0)
+            {
+                //Alt+F4によるアプリ終了
+                var actions = new Actions(Session);
+                actions.SendKeys(OpenQA.Selenium.Keys.Alt + OpenQA.Selenium.Keys.F4 + OpenQA.Selenium.Keys.Alt);
+                actions.Perform();
+            }
+            Session.WindowHandles.Select(x => Session.SwitchTo().Window(x)).ToList().ForEach(x => x.Dispose());
+            Session.Quit();
+            Session = null;
+        }
+
+        private void RebootWinAppDriver()
+        {
+            if (wad is not null)
+            {
+                if (!wad.HasExited)
+                {
+                    wad.Kill();
+                }
+                wad = null;
+            }
+            wad = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
         }
     }
 }
