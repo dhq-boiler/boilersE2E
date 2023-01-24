@@ -362,6 +362,10 @@ namespace boilersE2E.xUnit
 
         private static void QuitTargetApp()
         {
+            if (Session is null)
+            {
+                return;
+            }
             while (Session.WindowHandles.Count() > 0)
             {
                 //Alt+F4によるアプリ終了
