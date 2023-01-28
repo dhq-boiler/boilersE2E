@@ -370,6 +370,7 @@ namespace boilersE2E.xUnit
             {
                 try
                 {
+                    Session.SwitchTo().Window(Session.CurrentWindowHandle);
                     //Alt+F4によるアプリ終了
                     var actions = new Actions(Session);
                     actions.SendKeys(OpenQA.Selenium.Keys.Alt + OpenQA.Selenium.Keys.F4 + OpenQA.Selenium.Keys.Alt);
