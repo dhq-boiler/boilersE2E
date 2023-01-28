@@ -36,6 +36,10 @@ namespace WindowsFormsApp
             {
                 s = string.Format(s, args);
                 object result = dt.Compute(s, "");
+                if (string.IsNullOrEmpty(result.ToString()))
+                {
+                    return default(T);
+                }
                 var converter = TypeDescriptor.GetConverter(typeof(T));
                 return (T)converter.ConvertFromString(result.ToString());
             }
@@ -60,6 +64,10 @@ namespace WindowsFormsApp
 
         private bool IfPreviousCharIsOperator()
         {
+            if (fomula.Text.Length == 0)
+            {
+                return false;
+            }
             return fomula.Text.Last() == '+'
                 || fomula.Text.Last() == '-'
                 || fomula.Text.Last() == '×'
