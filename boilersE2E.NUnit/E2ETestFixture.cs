@@ -410,12 +410,19 @@ namespace boilersE2E.NUnit
             {
                 return;
             }
-            while (Session.WindowHandles.Count() > 0)
+            while (Session.WindowHandles.Any())
             {
-                //Alt+F4によるアプリ終了
-                var actions = new Actions(Session);
-                actions.SendKeys(OpenQA.Selenium.Keys.Alt + OpenQA.Selenium.Keys.F4 + OpenQA.Selenium.Keys.Alt);
-                actions.Perform();
+                try
+                {
+                    //Alt+F4によるアプリ終了
+                    var actions = new Actions(Session);
+                    actions.SendKeys(OpenQA.Selenium.Keys.Alt + OpenQA.Selenium.Keys.F4 + OpenQA.Selenium.Keys.Alt);
+                    actions.Perform();
+                }
+                catch (WebDriverException e)
+                {
+                    s_logger.Warn(e);
+                }
             }
             Session.WindowHandles.Select(x => Session.SwitchTo().Window(x)).ToList().ForEach(x => x.Dispose());
             Session.Quit();
