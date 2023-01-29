@@ -1,4 +1,3 @@
-using boilersE2E.MsTest;
 using System.Drawing;
 using System.Reflection;
 

@@ -1,5 +1,4 @@
 ﻿using Xunit;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace boilersE2E.xUnit
 {

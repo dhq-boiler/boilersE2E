@@ -97,9 +97,8 @@ namespace boilersE2E.Core
         /// <summary>
         /// 要素に文字列を入力します。
         /// </summary>
-        /// <param name="element">文字列を入力する対象の WindowsElement オブジェクト</param>
         /// <param name="text">入力する文字列</param>
-        public static void InputText(WindowsElement element, string text)
+        public static void InputText(string text)
         {
             Util.SetTextToClipboard(text);
             Session.Keyboard.PressKey(OpenQA.Selenium.Keys.Control + "v" + OpenQA.Selenium.Keys.Control);
@@ -267,20 +266,25 @@ namespace boilersE2E.Core
             }
         }
 
+#if false
         /// <summary>
         /// xUnit v3 になるまで使用不可。
         /// スクリーンショットを撮影します。
         /// スクリーンショットの保存先ディレクトリは $(TargetDir) になります。
         /// </summary>
         /// <param name="filename">撮影したスクリーンショットの保存ファイル名</param>
-        //public static void TakeScreenShot(string filename)
-        //{
-        //    Session.GetScreenshot().SaveAsFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
-        //    TestContext.AddTestAttachment($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
-        //}
+        public static void TakeScreenShot(string filename)
+        {
+            Session.GetScreenshot().SaveAsFile($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
+            TestContext.AddTestAttachment($"{AppDomain.CurrentDomain.BaseDirectory}\\{filename}");
+        }
+#endif
 
+        /// <summary>
+        /// WindowsDriverインスタンスを作成します。
+        /// </summary>
         public abstract void CreateSession();
-
+        
         protected static void QuitTargetApp()
         {
             if (Session is null)

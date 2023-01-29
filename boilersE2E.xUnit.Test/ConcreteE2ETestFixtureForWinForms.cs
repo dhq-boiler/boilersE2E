@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using xRetry;
 
 namespace boilersE2E.xUnit.Test
@@ -163,10 +158,10 @@ namespace boilersE2E.xUnit.Test
             Assert.Equal("0", GetElementByAutomationID("display").Text);
 
             GetElementByAutomationID("display").ClearRepeatedlyUntilTimeout();
-            InputText(GetElementByAutomationID("display"), "123456789");
+            InputText("123456789");
             GetElementByAutomationID("plus").Click();
             GetElementByAutomationID("display").ClearRepeatedlyUntilTimeout();
-            InputText(GetElementByAutomationID("display"), "987654321");
+            InputText("987654321");
             GetElementByAutomationID("equal").Click();
 
             Assert.Equal("123456789+987654321", GetElementByAutomationID("fomula").Text);

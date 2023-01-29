@@ -1,14 +1,11 @@
+using boilersE2E.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
-using boilersE2E.Core;
 
 namespace boilersE2E.MsTest
 {
@@ -16,6 +13,8 @@ namespace boilersE2E.MsTest
     public abstract class E2ETestFixture : E2ETestFixtureBase
     {
         private static readonly Logger s_logger = LogManager.GetCurrentClassLogger();
+
+        public TestContext TestContext { get; internal set; }
 
         /// <summary>
         /// TestInitializeメソッド内でWindowsDriverオブジェクトを生成し、テストセッションを開始した後に任意の処理を実行します。
