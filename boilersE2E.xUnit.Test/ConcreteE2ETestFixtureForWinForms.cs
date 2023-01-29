@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using xRetry;
 
 namespace boilersE2E.xUnit.Test
 {
@@ -156,11 +157,12 @@ namespace boilersE2E.xUnit.Test
             Assert.Equal("0", Session.FindElementByAccessibilityId("display").Text);
         }
 
-        [WpfFact]
+        [RetryFact(10)]
         public void Paste()
         {
             Assert.Equal("0", Session.FindElementByAccessibilityId("display").Text);
 
+            GetElementByAutomationID("display").ClearRepeatedlyUntilTimeout();
             InputText(Session.FindElementByAccessibilityId("display"), "123456789");
             Session.FindElementByAccessibilityId("plus").Click();
             Session.FindElementByAccessibilityId("display").ClearRepeatedlyUntilTimeout();

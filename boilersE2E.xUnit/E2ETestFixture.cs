@@ -162,7 +162,7 @@ namespace boilersE2E.xUnit
         public static void InputText(WindowsElement element, string text)
         {
             Util.SetTextToClipboard(text);
-            element.SendKeys(OpenQA.Selenium.Keys.Control + "v" + OpenQA.Selenium.Keys.Control);
+            Session.Keyboard.PressKey(OpenQA.Selenium.Keys.Control + "v" + OpenQA.Selenium.Keys.Control);
         }
 
         /// <summary>

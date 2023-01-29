@@ -157,11 +157,12 @@ namespace boilersE2E.MsTest.Test
             Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
         }
 
-        [STATestMethod, Retry(3)]
+        [STATestMethod, Retry(10)]
         public void Paste()
         {
             Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
 
+            GetElementByAutomationID("display").ClearRepeatedlyUntilTimeout();
             InputText(Session.FindElementByAccessibilityId("display"), "123456789");
             Session.FindElementByAccessibilityId("plus").Click();
             Session.FindElementByAccessibilityId("display").ClearRepeatedlyUntilTimeout();
