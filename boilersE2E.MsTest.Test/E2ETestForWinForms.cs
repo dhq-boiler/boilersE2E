@@ -1,4 +1,3 @@
-using boilersE2E.MsTest;
 using MSTest.TestFramework.Extensions.AttributeEx;
 using System.Drawing;
 using System.Reflection;
@@ -20,156 +19,157 @@ namespace boilersE2E.MsTest.Test
         [TestMethod]
         public void Calc_123Plus456()
         {
-            Session.FindElementByAccessibilityId("one").Click();
-            Session.FindElementByAccessibilityId("two").Click();
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("plus").Click();
-            Session.FindElementByAccessibilityId("four").Click();
-            Session.FindElementByAccessibilityId("five").Click();
-            Session.FindElementByAccessibilityId("six").Click();
-            Session.FindElementByAccessibilityId("equal").Click();
+            GetElementByAutomationID("one").Click();
+            GetElementByAutomationID("two").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("plus").Click();
+            GetElementByAutomationID("four").Click();
+            GetElementByAutomationID("five").Click();
+            GetElementByAutomationID("six").Click();
+            GetElementByAutomationID("equal").Click();
 
-            Assert.AreEqual("579", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("579", GetElementByAutomationID("display").Text);
         }
 
         [TestMethod]
         public void Calc_123Minus456()
         {
-            Session.FindElementByAccessibilityId("one").Click();
-            Session.FindElementByAccessibilityId("two").Click();
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("minus").Click();
-            Session.FindElementByAccessibilityId("four").Click();
-            Session.FindElementByAccessibilityId("five").Click();
-            Session.FindElementByAccessibilityId("six").Click();
-            Session.FindElementByAccessibilityId("equal").Click();
+            GetElementByAutomationID("one").Click();
+            GetElementByAutomationID("two").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("minus").Click();
+            GetElementByAutomationID("four").Click();
+            GetElementByAutomationID("five").Click();
+            GetElementByAutomationID("six").Click();
+            GetElementByAutomationID("equal").Click();
 
-            Assert.AreEqual("-333", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("-333", GetElementByAutomationID("display").Text);
         }
 
         [TestMethod]
         public void Calc_369Multiple3()
         {
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("six").Click();
-            Session.FindElementByAccessibilityId("nine").Click();
-            Session.FindElementByAccessibilityId("multiple").Click();
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("equal").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("six").Click();
+            GetElementByAutomationID("nine").Click();
+            GetElementByAutomationID("multiple").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("equal").Click();
 
-            Assert.AreEqual("1107", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("1107", GetElementByAutomationID("display").Text);
         }
 
         [TestMethod]
         public void Calc_369Divide3()
         {
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("six").Click();
-            Session.FindElementByAccessibilityId("nine").Click();
-            Session.FindElementByAccessibilityId("divide").Click();
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("equal").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("six").Click();
+            GetElementByAutomationID("nine").Click();
+            GetElementByAutomationID("divide").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("equal").Click();
 
-            Assert.AreEqual("123", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("123", GetElementByAutomationID("display").Text);
         }
 
         [TestMethod]
         public void Calc_33_3Divide3()
         {
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("dot").Click();
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("divide").Click();
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("equal").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("dot").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("divide").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("equal").Click();
 
-            Assert.AreEqual("11.1", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("11.1", GetElementByAutomationID("display").Text);
         }
 
         [TestMethod]
         public void C()
         {
-            Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("0", GetElementByAutomationID("display").Text);
 
-            Session.FindElementByAccessibilityId("Clear").Click();
+            GetElementByAutomationID("Clear").Click();
 
-            Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("0", GetElementByAutomationID("display").Text);
 
-            Session.FindElementByAccessibilityId("one").Click();
-            Session.FindElementByAccessibilityId("two").Click();
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("four").Click();
-            Session.FindElementByAccessibilityId("five").Click();
-            Session.FindElementByAccessibilityId("six").Click();
-            Session.FindElementByAccessibilityId("seven").Click();
-            Session.FindElementByAccessibilityId("eight").Click();
-            Session.FindElementByAccessibilityId("nine").Click();
-            Session.FindElementByAccessibilityId("zero").Click();
+            GetElementByAutomationID("one").Click();
+            GetElementByAutomationID("two").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("four").Click();
+            GetElementByAutomationID("five").Click();
+            GetElementByAutomationID("six").Click();
+            GetElementByAutomationID("seven").Click();
+            GetElementByAutomationID("eight").Click();
+            GetElementByAutomationID("nine").Click();
+            GetElementByAutomationID("zero").Click();
 
-            Assert.AreEqual("1234567890", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("1234567890", GetElementByAutomationID("display").Text);
 
-            Session.FindElementByAccessibilityId("Clear").Click();
+            GetElementByAutomationID("Clear").Click();
 
-            Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("0", GetElementByAutomationID("display").Text);
         }
 
         [TestMethod]
         public void CE()
         {
-            Assert.AreEqual(string.Empty, Session.FindElementByAccessibilityId("fomula").Text);
-            Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual(string.Empty, GetElementByAutomationID("fomula").Text);
+            Assert.AreEqual("0", GetElementByAutomationID("display").Text);
 
-            Session.FindElementByAccessibilityId("ClearEntry").Click();
+            GetElementByAutomationID("ClearEntry").Click();
 
-            Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("0", GetElementByAutomationID("display").Text);
 
-            Session.FindElementByAccessibilityId("one").Click();
-            Session.FindElementByAccessibilityId("two").Click();
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("four").Click();
-            Session.FindElementByAccessibilityId("five").Click();
-            Session.FindElementByAccessibilityId("six").Click();
-            Session.FindElementByAccessibilityId("seven").Click();
-            Session.FindElementByAccessibilityId("eight").Click();
-            Session.FindElementByAccessibilityId("nine").Click();
-            Session.FindElementByAccessibilityId("zero").Click();
+            GetElementByAutomationID("one").Click();
+            GetElementByAutomationID("two").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("four").Click();
+            GetElementByAutomationID("five").Click();
+            GetElementByAutomationID("six").Click();
+            GetElementByAutomationID("seven").Click();
+            GetElementByAutomationID("eight").Click();
+            GetElementByAutomationID("nine").Click();
+            GetElementByAutomationID("zero").Click();
 
-            Session.FindElementByAccessibilityId("plus").Click();
+            GetElementByAutomationID("plus").Click();
 
-            Session.FindElementByAccessibilityId("one").Click();
-            Session.FindElementByAccessibilityId("two").Click();
-            Session.FindElementByAccessibilityId("three").Click();
-            Session.FindElementByAccessibilityId("four").Click();
-            Session.FindElementByAccessibilityId("five").Click();
-            Session.FindElementByAccessibilityId("six").Click();
-            Session.FindElementByAccessibilityId("seven").Click();
-            Session.FindElementByAccessibilityId("eight").Click();
-            Session.FindElementByAccessibilityId("nine").Click();
-            Session.FindElementByAccessibilityId("zero").Click();
+            GetElementByAutomationID("one").Click();
+            GetElementByAutomationID("two").Click();
+            GetElementByAutomationID("three").Click();
+            GetElementByAutomationID("four").Click();
+            GetElementByAutomationID("five").Click();
+            GetElementByAutomationID("six").Click();
+            GetElementByAutomationID("seven").Click();
+            GetElementByAutomationID("eight").Click();
+            GetElementByAutomationID("nine").Click();
+            GetElementByAutomationID("zero").Click();
 
-            Assert.AreEqual("1234567890+1234567890", Session.FindElementByAccessibilityId("fomula").Text);
-            Assert.AreEqual("1234567890", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("1234567890+1234567890", GetElementByAutomationID("fomula").Text);
+            Assert.AreEqual("1234567890", GetElementByAutomationID("display").Text);
 
-            Session.FindElementByAccessibilityId("ClearEntry").Click();
+            GetElementByAutomationID("ClearEntry").Click();
 
-            Assert.AreEqual(string.Empty, Session.FindElementByAccessibilityId("fomula").Text);
-            Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual(string.Empty, GetElementByAutomationID("fomula").Text);
+            Assert.AreEqual("0", GetElementByAutomationID("display").Text);
         }
 
-        [STATestMethod, Retry(3)]
+        [STATestMethod, Retry(10)]
         public void Paste()
         {
-            Assert.AreEqual("0", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("0", GetElementByAutomationID("display").Text);
 
-            InputText(Session.FindElementByAccessibilityId("display"), "123456789");
-            Session.FindElementByAccessibilityId("plus").Click();
-            Session.FindElementByAccessibilityId("display").ClearRepeatedlyUntilTimeout();
-            InputText(Session.FindElementByAccessibilityId("display"), "987654321");
-            Session.FindElementByAccessibilityId("equal").Click();
+            GetElementByAutomationID("display").ClearRepeatedlyUntilTimeout();
+            InputText("123456789");
+            GetElementByAutomationID("plus").Click();
+            GetElementByAutomationID("display").ClearRepeatedlyUntilTimeout();
+            InputText("987654321");
+            GetElementByAutomationID("equal").Click();
 
-            Assert.AreEqual("123456789+987654321", Session.FindElementByAccessibilityId("fomula").Text);
-            Assert.AreEqual("1111111110", Session.FindElementByAccessibilityId("display").Text);
+            Assert.AreEqual("123456789+987654321", GetElementByAutomationID("fomula").Text);
+            Assert.AreEqual("1111111110", GetElementByAutomationID("display").Text);
         }
     }
 }

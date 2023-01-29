@@ -296,6 +296,10 @@ namespace WPFApp.ViewModels
             {
                 s = string.Format(s, args);
                 object result = dt.Compute(s, "");
+                if (string.IsNullOrEmpty(result.ToString()))
+                {
+                    return default(T);
+                }
                 var converter = TypeDescriptor.GetConverter(typeof(T));
                 return (T)converter.ConvertFromString(result.ToString());
             }
@@ -320,6 +324,10 @@ namespace WPFApp.ViewModels
 
         private bool IfPreviousCharIsOperator()
         {
+            if (Fomula.Value.Length == 0)
+            {
+                return false;
+            }
             return Fomula.Value.Last() == '+'
                 || Fomula.Value.Last() == '-'
                 || Fomula.Value.Last() == '×'

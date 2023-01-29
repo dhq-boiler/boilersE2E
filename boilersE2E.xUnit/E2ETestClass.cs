@@ -1,11 +1,5 @@
 using OpenQA.Selenium.Appium.Windows;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace boilersE2E.xUnit
 {
@@ -22,7 +16,9 @@ namespace boilersE2E.xUnit
             var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixture.EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
-                E2ETestFixture.wad = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
+                E2ETestFixture.WinAppDriverProcess =
+                    Process.Start(
+                        new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
             }
         }
 
@@ -35,7 +31,7 @@ namespace boilersE2E.xUnit
             var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixture.EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
-                E2ETestFixture.wad.Kill();
+                E2ETestFixture.WinAppDriverProcess.Kill();
             }
         }
     }
