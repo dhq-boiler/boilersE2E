@@ -13,6 +13,7 @@ namespace boilersE2E.MsTest
     public abstract class E2ETestFixture : E2ETestFixtureBase
     {
         private static readonly Logger s_logger = LogManager.GetCurrentClassLogger();
+        private Stopwatch stopwatch = new Stopwatch();
 
         public TestContext TestContext { get; internal set; }
 
@@ -66,19 +67,27 @@ namespace boilersE2E.MsTest
         [TestInitialize]
         public void TestInitialize()
         {
+            stopwatch.Start();
+            s_logger.Info($"[{TestContext.TestName}]Begin Unit Test.");
             var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (WinAppDriverProcess is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
             {
                 WinAppDriverProcess = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
+                s_logger.Debug($"[{TestContext.TestName}]Started WinAppDriver.exe process.");
             }
 
             if (Session == null)
             {
+                s_logger.Debug($"[{TestContext.TestName}]Begin CreateSession().");
                 CreateSession();
+                s_logger.Debug($"[{TestContext.TestName}]End CreateSession().");
                 Assert.IsNotNull(Session);
 
+                s_logger.Debug($"[{TestContext.TestName}]Begin DoAfterBoot().");
                 DoAfterBoot();
+                s_logger.Debug($"[{TestContext.TestName}]End DoAfterBoot().");
 
+                s_logger.Debug($"[{TestContext.TestName}]Begin to set window size.");
                 environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereSetWindowSizeManually);
                 if (environmentVariable == "true" || environmentVariable == 1.ToString())
                 {
@@ -88,8 +97,11 @@ namespace boilersE2E.MsTest
                 {
                     MaximizeWindow();
                 }
+                s_logger.Debug($"[{TestContext.TestName}]End to set window size.");
 
+                s_logger.Debug($"[{TestContext.TestName}]Begin DoAfterSettingWindowSize().");
                 DoAfterSettingWindowSize();
+                s_logger.Debug($"[{TestContext.TestName}]End DoAfterSettingWindowSize().");
             }
         }
 
@@ -106,12 +118,18 @@ namespace boilersE2E.MsTest
                 //テストが失敗した時
                 if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
                 {
+                    s_logger.Debug($"[{TestContext.TestName}]Begin TakeScreenShot().");
                     //スクリーンショットを撮影する
                     TakeScreenShot($"{TestContext.FullyQualifiedTestClassName}.{TestContext.TestName}.png");
+                    s_logger.Debug($"[{TestContext.TestName}]End TakeScreenShot().");
                 }
 
+                s_logger.Debug($"[{TestContext.TestName}]Begin QuitTargetApp().");
                 QuitTargetApp();
+                s_logger.Debug($"[{TestContext.TestName}]End QuitTargetApp().");
             }
+            stopwatch.Stop();
+            s_logger.Info($"[{TestContext.TestName}]End Unit Test. Elapsed:{TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds).ToStringEx("hhhmmmsss")}");
         }
 
         /// <summary>

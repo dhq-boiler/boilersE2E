@@ -13,6 +13,7 @@ namespace boilersE2E.NUnit
     public abstract class E2ETestFixture : E2ETestFixtureBase
     {
         private static readonly Logger s_logger = LogManager.GetCurrentClassLogger();
+        private Stopwatch stopwatch = new Stopwatch();
 
         /// <summary>
         /// SetUpメソッド内でWindowsDriverオブジェクトを生成し、テストセッションを開始した後に任意の処理を実行します。
@@ -64,14 +65,28 @@ namespace boilersE2E.NUnit
         [SetUp]
         public void Setup()
         {
+            stopwatch.Start();
+            s_logger.Info($"[{TestContext.CurrentContext.Test.Name}]Begin Unit Test.");
+            var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
+            if (WinAppDriverProcess is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
+            {
+                WinAppDriverProcess = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Started WinAppDriver.exe process.");
+            }
+
             if (Session == null)
             {
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Begin CreateSession().");
                 CreateSession();
-                Assert.That(Session, Is.Not.Null);
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]End CreateSession().");
+                Assert.IsNotNull(Session);
 
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Begin DoAfterBoot().");
                 DoAfterBoot();
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]End DoAfterBoot().");
 
-                var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereSetWindowSizeManually);
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Begin to set window size.");
+                environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereSetWindowSizeManually);
                 if (environmentVariable == "true" || environmentVariable == 1.ToString())
                 {
                     Session.Manage().Window.Size = new Size(WindowSize.Width, WindowSize.Height);
@@ -80,8 +95,11 @@ namespace boilersE2E.NUnit
                 {
                     MaximizeWindow();
                 }
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]End to set window size.");
 
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Begin DoAfterSettingWindowSize().");
                 DoAfterSettingWindowSize();
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]End DoAfterSettingWindowSize().");
             }
         }
 
@@ -98,12 +116,18 @@ namespace boilersE2E.NUnit
                 //テストが失敗した時
                 if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
                 {
+                    s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Begin TakeScreenShot().");
                     //スクリーンショットを撮影する
                     TakeScreenShot($"{TestContext.CurrentContext.Test.FullName}.png");
+                    s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]End TakeScreenShot().");
                 }
 
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Begin QuitTargetApp().");
                 QuitTargetApp();
+                s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]End QuitTargetApp().");
             }
+            stopwatch.Stop();
+            s_logger.Info($"[{TestContext.CurrentContext.Test.Name}]End Unit Test. Elapsed:{TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds).ToStringEx("hhhmmmsss")}");
         }
         
         /// <summary>

@@ -41,5 +41,19 @@ namespace boilersE2E
                 }
             }
         }
+
+        public static string ToStringEx(this TimeSpan ts, string format)
+        {
+            string hh = ts.ToString("hh");
+            if (ts < TimeSpan.Zero) { hh = "-" + hh; }
+            string mm = ts.ToString("mm");
+            string ss = ts.ToString("ss");
+
+            format = format.Replace("hh", hh);
+            format = format.Replace("mm", mm);
+            format = format.Replace("ss", ss);
+
+            return format;
+        }
     }
 }
