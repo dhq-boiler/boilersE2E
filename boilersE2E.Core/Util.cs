@@ -7,11 +7,13 @@ namespace boilersE2E
         public static void SetTextToClipboard(string text)
         {
             Clippy.Result result;
+            var tryCount = 0;
             do
             {
                 result = Clippy.PushStringToClipboard(text);
+                tryCount++;
                 Thread.Sleep(100);
-            } while (!result.OK);
+            } while (!result.OK && tryCount <= 10);
         }
 
         /// <summary>

@@ -287,10 +287,15 @@ namespace boilersE2E.Core
         
         protected static void QuitTargetApp()
         {
+            s_logger.Debug($"Begin QuitTargetApp().");
+            s_logger.Trace($"Session is null: {Session is null}");
             if (Session is null)
             {
+                s_logger.Warn($"Exit QuitTargetApp() because Session is null.");
                 return;
             }
+
+            var exceptionCount = 0;
             while (Session.WindowHandles.Any())
             {
                 try
@@ -300,28 +305,47 @@ namespace boilersE2E.Core
                     var actions = new Actions(Session);
                     actions.SendKeys(OpenQA.Selenium.Keys.Alt + OpenQA.Selenium.Keys.F4 + OpenQA.Selenium.Keys.Alt);
                     actions.Perform();
+                    s_logger.Trace($"Send Alt+F4.");
                 }
                 catch (WebDriverException e)
                 {
                     s_logger.Warn(e);
+                    exceptionCount++;
+                    if (exceptionCount == 10)
+                    {
+                        s_logger.Trace($"Go to kill mode.");
+                        break;
+                    }
                 }
+                s_logger.Trace($"Session.WindowHandles.Any(): {Session.WindowHandles.Any()}");
             }
             Session.WindowHandles.Select(x => Session.SwitchTo().Window(x)).ToList().ForEach(x => x.Dispose());
+            s_logger.Trace($"Being Session.Quit().");
             Session.Quit();
+            s_logger.Trace($"End Session.Quit().");
             Session = null;
+            s_logger.Debug($"End QuitTargetApp().");
         }
 
         protected void RebootWinAppDriver()
         {
+            s_logger.Debug($"Being RebootWinAppDriver().");
+            s_logger.Trace($"WinAppDriverProcess is not null: {WinAppDriverProcess is not null}");
             if (WinAppDriverProcess is not null)
             {
+                s_logger.Trace($"!WinAppDriverProcess.HasExited: {!WinAppDriverProcess.HasExited}");
                 if (!WinAppDriverProcess.HasExited)
                 {
+                    s_logger.Trace($"Being WinAppDriverProcess.Kill().");
                     WinAppDriverProcess.Kill();
+                    s_logger.Trace($"End WinAppDriverProcess.Kill().");
                 }
                 WinAppDriverProcess = null;
             }
+            s_logger.Trace($"Being Process.Start().");
             WinAppDriverProcess = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
+            s_logger.Trace($"End Process.Start().");
+            s_logger.Debug($"End RebootWinAppDriver().");
         }
     }
 }
