@@ -14,6 +14,11 @@ namespace boilersE2E
                 tryCount++;
                 Thread.Sleep(100);
             } while (!result.OK && tryCount <= 10);
+
+            if (!result.OK)
+            {
+                throw new Exception("result.OK == false");
+            }
         }
 
         /// <summary>

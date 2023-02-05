@@ -64,6 +64,9 @@ namespace Kolibri
         [DllImport("user32.dll")]
         private static extern IntPtr SetClipboardData(uint uFormat, IntPtr data);
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr EmptyClipboard();
+
         public enum ResultCode
         {
             Success = 0,
@@ -205,6 +208,8 @@ namespace Kolibri
                                 {
                                     var ignore = GlobalUnlock(target);
                                 }
+
+                                EmptyClipboard();
 
                                 if (SetClipboardData(format, hGlobal).ToInt64() != 0)
                                 {
