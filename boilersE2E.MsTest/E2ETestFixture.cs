@@ -169,7 +169,6 @@ namespace boilersE2E.MsTest
             Assert.IsNotNull(Session);
         }
 
-        [ConditionalEnvironmentVariable("LocalPC")]
         protected override void RebootWinAppDriver()
         {
             s_logger.Debug($"Being RebootWinAppDriver().");

@@ -167,7 +167,6 @@ namespace boilersE2E.NUnit
             Assert.That(Session, Is.Not.Null);
         }
 
-        [ConditionalEnvironmentVariable("LocalPC")]
         protected override void RebootWinAppDriver()
         {
             s_logger.Debug($"Being RebootWinAppDriver().");

@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿
+using NLog;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Interactions;
@@ -327,6 +328,7 @@ namespace boilersE2E.Core
             s_logger.Debug($"End QuitTargetApp().");
         }
 
+        [Conditional("LOCALPC")]
         protected abstract void RebootWinAppDriver();
     }
 }
