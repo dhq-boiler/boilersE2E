@@ -327,25 +327,6 @@ namespace boilersE2E.Core
             s_logger.Debug($"End QuitTargetApp().");
         }
 
-        protected void RebootWinAppDriver()
-        {
-            s_logger.Debug($"Being RebootWinAppDriver().");
-            s_logger.Trace($"WinAppDriverProcess is not null: {WinAppDriverProcess is not null}");
-            if (WinAppDriverProcess is not null)
-            {
-                s_logger.Trace($"!WinAppDriverProcess.HasExited: {!WinAppDriverProcess.HasExited}");
-                if (!WinAppDriverProcess.HasExited)
-                {
-                    s_logger.Trace($"Being WinAppDriverProcess.Kill().");
-                    WinAppDriverProcess.Kill();
-                    s_logger.Trace($"End WinAppDriverProcess.Kill().");
-                }
-                WinAppDriverProcess = null;
-            }
-            s_logger.Trace($"Being Process.Start().");
-            WinAppDriverProcess = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
-            s_logger.Trace($"End Process.Start().");
-            s_logger.Debug($"End RebootWinAppDriver().");
-        }
+        protected abstract void RebootWinAppDriver();
     }
 }
