@@ -6,6 +6,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System.Diagnostics;
 using System.Net;
+using WindowsInput;
 
 namespace boilersE2E.Core
 {
@@ -99,10 +100,24 @@ namespace boilersE2E.Core
         /// 要素に文字列を入力します。
         /// </summary>
         /// <param name="text">入力する文字列</param>
-        public static void InputText(string text)
+        public void InputText(string text)
         {
-            Util.SetTextToClipboard(text);
-            Session.Keyboard.PressKey(OpenQA.Selenium.Keys.Control + "v" + OpenQA.Selenium.Keys.Control);
+            int count = 0;
+            while (true)
+            {
+                Util.SetTextToClipboard(text);
+                InputSimulator sim = new InputSimulator();
+                sim.Keyboard.TextEntry(text);
+                if (Session.SwitchTo().ActiveElement().Text.Equals(text))
+                {
+                    break;
+                }
+                count++;
+                if (count >= 10)
+                {
+                    throw new Exception($"Failed to input text=[{text}].");
+                }
+            }
         }
 
         /// <summary>
