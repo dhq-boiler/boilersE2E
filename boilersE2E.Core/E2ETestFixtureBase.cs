@@ -109,9 +109,11 @@ namespace boilersE2E.Core
             {
                 try
                 {
+                    InputSimulator sim = new InputSimulator();
+
                     ActionWithLog(() => Session.SwitchTo().Window(Session.CurrentWindowHandle), "A");
 
-                    //Util.SetTextToClipboard(text);
+                    ActionWithLog(() => sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.TAB), "AA");
 
                     //フォーカスを外す
                     ActionWithLog(() => ExistsElementByAutomationID("DUMMY-ELEMENT", 100), "B");
@@ -119,17 +121,15 @@ namespace boilersE2E.Core
                     //フォーカスする
                     ActionWithLog(() => elm.Click(), "C");
 
-                    InputSimulator sim = new InputSimulator();
-
                     if (elm.Displayed)
                     {
-                        ActionWithLog(() => sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_A), "D");
-                        ActionWithLog(() => sim.Keyboard.KeyPress(VirtualKeyCode.DELETE), "E");
-                        //sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
-                        ActionWithLog(() => sim.Keyboard.TextEntry(text), "F");
-                        ActionWithLog(() => sim.Keyboard.Sleep(100), "G");
+                        ActionWithLog(() => sim.Keyboard.KeyDown(VirtualKeyCode.DELETE), "D");
+                        ActionWithLog(() => sim.Keyboard.Sleep(1000), "E");
+                        ActionWithLog(() => sim.Keyboard.KeyUp(VirtualKeyCode.DELETE), "F");
+                        ActionWithLog(() => sim.Keyboard.TextEntry(text), "G");
+                        ActionWithLog(() => sim.Keyboard.Sleep(100), "H");
 
-                        if (FuncWithLog(() => elm.Text.Equals(text), "F"))
+                        if (FuncWithLog(() => elm.Text.Equals(text), "I"))
                         {
                             break;
                         }
