@@ -158,7 +158,7 @@ namespace boilersE2E.NUnit
             {
                 Session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), options);
             }
-            catch (WebDriverException e)
+            catch (WebDriverException)
             {
                 QuitTargetApp();
                 RebootWinAppDriver();

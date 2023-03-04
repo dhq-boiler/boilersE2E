@@ -1,7 +1,7 @@
-﻿using NLog;
+﻿using boilersE2E.Core;
+using NLog;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Windows;
-using OpenQA.Selenium.Interactions;
 
 namespace boilersE2E
 {
@@ -12,17 +12,6 @@ namespace boilersE2E
     {
         private static readonly Logger s_logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        /// WindowsElementオブジェクトに文字列を送信するActionsオブジェクトを構成します。
-        /// </summary>
-        /// <param name="actions">構成するActionsオブジェクト</param>
-        /// <param name="element">文字列を送信するWindowsElement</param>
-        /// <param name="text">送信する文字列</param>
-        public static void InputText(this Actions actions, WindowsElement element, string text)
-        {
-            Util.SetTextToClipboard(text);
-            actions.SendKeys(element, OpenQA.Selenium.Keys.Control + "v" + OpenQA.Selenium.Keys.Control);
-        }
 
         public static void ClearRepeatedlyUntilTimeout(this WindowsElement element, int timeoutSeconds = 10)
         {
@@ -37,7 +26,7 @@ namespace boilersE2E
                 }
                 catch (WebDriverException e)
                 {
-                    s_logger.Error(e);
+                    s_logger.Warn(e);
                 }
             }
         }

@@ -162,10 +162,10 @@ namespace boilersE2E.MsTest.Test
             Assert.AreEqual("0", GetElementByAutomationID("display").Text);
 
             GetElementByAutomationID("display").ClearRepeatedlyUntilTimeout();
-            InputText("123456789");
+            InputText(GetElementByAutomationID("display"), "123456789");
             GetElementByAutomationID("plus").Click();
             GetElementByAutomationID("display").ClearRepeatedlyUntilTimeout();
-            InputText("987654321");
+            InputText(GetElementByAutomationID("display"), "987654321");
             GetElementByAutomationID("equal").Click();
 
             Assert.AreEqual("123456789+987654321", GetElementByAutomationID("fomula").Text);
