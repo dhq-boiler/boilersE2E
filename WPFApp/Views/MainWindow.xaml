@@ -56,7 +56,7 @@
             BorderThickness="0"
             FontSize="14"
             IsReadOnly="True"
-            Text="{Binding Fomula.Value}" />
+            Text="{Binding Fomula.Value, Mode=OneWay}" />
         <TextBox
             x:Name="display"
             Grid.Row="1"
