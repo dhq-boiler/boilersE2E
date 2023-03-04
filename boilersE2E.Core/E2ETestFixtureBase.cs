@@ -6,6 +6,8 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System.Diagnostics;
 using System.Net;
+using WindowsInput;
+using WindowsInput.Native;
 
 namespace boilersE2E.Core
 {
@@ -95,14 +97,57 @@ namespace boilersE2E.Core
             }
         }
 
+        [STAThread]
         /// <summary>
         /// 要素に文字列を入力します。
         /// </summary>
         /// <param name="text">入力する文字列</param>
-        public static void InputText(string text)
+        public void InputText(WindowsElement elm, string text)
         {
-            Util.SetTextToClipboard(text);
-            Session.Keyboard.PressKey(OpenQA.Selenium.Keys.Control + "v" + OpenQA.Selenium.Keys.Control);
+            int count = 0;
+            while (true)
+            {
+                try
+                {
+                    ActionWithLog(() => Session.SwitchTo().Window(Session.CurrentWindowHandle), "A");
+
+                    //Util.SetTextToClipboard(text);
+
+                    //フォーカスを外す
+                    ActionWithLog(() => ExistsElementByAutomationID("DUMMY-ELEMENT", 100), "B");
+
+                    //フォーカスする
+                    ActionWithLog(() => elm.Click(), "C");
+
+                    InputSimulator sim = new InputSimulator();
+
+                    if (elm.Displayed)
+                    {
+                        ActionWithLog(() => sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_A), "D");
+                        ActionWithLog(() => sim.Keyboard.KeyPress(VirtualKeyCode.DELETE), "E");
+                        //sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
+                        ActionWithLog(() => sim.Keyboard.TextEntry(text), "F");
+                        ActionWithLog(() => sim.Keyboard.Sleep(100), "G");
+
+                        if (FuncWithLog(() => elm.Text.Equals(text), "F"))
+                        {
+                            break;
+                        }
+                    }
+                }
+                catch (WebDriverException e)
+                {
+                }
+
+                count++;
+                
+                if (count >= 10)
+                {
+                    throw new Exception($"Failed to input text=[{text}].");
+                }
+
+                Thread.Sleep(100);
+            }
         }
 
         /// <summary>
@@ -127,8 +172,15 @@ namespace boilersE2E.Core
             {
                 wait.Until(Driver =>
                 {
-                    element = Driver.FindElementByAccessibilityId(automationId);
-                    return element != null;
+                    try
+                    {
+                        element = Driver.FindElementByAccessibilityId(automationId);
+                        return element != null;
+                    }
+                    catch (WebDriverException)
+                    {
+                        return false;
+                    }
                 });
             }
             catch (WebDriverTimeoutException ex)
@@ -213,15 +265,15 @@ namespace boilersE2E.Core
         /// AutomationIDで要素を検索し、存在するか検証します。
         /// </summary>
         /// <param name="automationId">AutomationID</param>
-        /// <param name="timeOutSeconds">タイムアウト秒数</param>
+        /// <param name="timeOutMilliseconds">タイムアウトミリ秒数</param>
         /// <returns>存在する場合は true、存在しない場合は false を返します。</returns>
-        public static bool ExistsElementByAutomationID(string automationId, int timeOutSeconds = 10)
+        public static bool ExistsElementByAutomationID(string automationId, int timeOutMilliseconds = 10000)
         {
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
             {
-                Timeout = TimeSpan.FromSeconds(timeOutSeconds),
+                Timeout = TimeSpan.FromMilliseconds(timeOutMilliseconds),
                 Message = $"Element with automationId \"{automationId}\" not found."
             };
 
@@ -231,8 +283,15 @@ namespace boilersE2E.Core
             {
                 wait.Until(Driver =>
                 {
-                    element = Driver.FindElementByAccessibilityId(automationId);
-                    return element != null;
+                    try
+                    {
+                        element = Driver.FindElementByAccessibilityId(automationId);
+                        return element != null;
+                    }
+                    catch (WebDriverException)
+                    {
+                        return false;
+                    }
                 });
             }
             catch (WebDriverTimeoutException ex)
@@ -348,6 +407,24 @@ namespace boilersE2E.Core
             WinAppDriverProcess = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
             s_logger.Trace($"End Process.Start().");
             s_logger.Debug($"End RebootWinAppDriver().");
+        }
+
+        protected void ActionWithLog(Action action, string logmessage)
+        {
+            action();
+            s_logger.Info(logmessage);
+        }
+
+        protected bool FuncWithLog(Func<bool> func, string logmessage)
+        {
+            try
+            {
+                return func();
+            }
+            finally
+            {
+                s_logger.Info(logmessage);
+            }
         }
     }
 }

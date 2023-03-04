@@ -160,10 +160,10 @@ namespace boilersE2E.NUnit.Test
             Assert.That(GetElementByAutomationID("display").Text, Is.EqualTo("0"));
 
             GetElementByAutomationID("display").ClearRepeatedlyUntilTimeout();
-            InputText("123456789");
+            InputText(GetElementByAutomationID("display"), "123456789");
             GetElementByAutomationID("plus").Click();
             GetElementByAutomationID("display").ClearRepeatedlyUntilTimeout();
-            InputText("987654321");
+            InputText(GetElementByAutomationID("display"), "987654321");
             GetElementByAutomationID("equal").Click();
 
             Assert.That(GetElementByAutomationID("fomula").Text, Is.EqualTo("123456789+987654321"));
