@@ -1,24 +1,78 @@
 ﻿using Prism.Mvvm;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reactive.Disposables;
-using System.Windows.Controls;
-using System;
-using Windows.Graphics;
-using System.Windows.Input;
+using System.Reactive.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using WPFApp.Views;
-using System.ComponentModel.Design;
 
 namespace WPFApp.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
         private CompositeDisposable disposables = new CompositeDisposable();
-        public ReactivePropertySlim<string> Fomula { get; } = new ReactivePropertySlim<string>();
+        public ReadOnlyReactivePropertySlim<string> Fomula { get; }
+
+        public class FomulaList : ReactiveCollection<string>
+        {
+            internal void RemoveLastChar()
+            {
+                var last = this.Last();
+                RemoveLastString();
+                var newItem = last.Substring(0, last.Length - 1);
+                Add(newItem);
+            }
+
+            internal void Initialize()
+            {
+                Clear();
+                Add(string.Empty);
+            }
+
+            internal void RemoveLastString()
+            {
+                if (this.Count() < 1)
+                    return;
+                if (IfPreviousCharIsOperator())
+                    return;
+                RemoveAt(this.Count() - 1);
+            }
+
+            internal void AppendChar(char v)
+            {
+                var last = this.Last();
+                RemoveLastString();
+                var newItem = last + v;
+                Add(newItem);
+            }
+
+            internal void ReplaceLastString(string value)
+            {
+                if (!IfPreviousCharIsOperator())
+                RemoveLastString();
+                Add(value);
+            }
+
+            private bool IfPreviousCharIsOperator()
+            {
+                if (this.Count() == 0)
+                {
+                    return false;
+                }
+                return this.Last().LastOrDefault() == '+'
+                    || this.Last().LastOrDefault() == '-'
+                    || this.Last().LastOrDefault() == '×'
+                    || this.Last().LastOrDefault() == '÷';
+            }
+        }
+
+        public FomulaList FomulaListObj { get; } = new FomulaList();
         public ReactivePropertySlim<string> Display { get; } = new ReactivePropertySlim<string>();
 
         public ReactiveCommand BackSpaceCommand { get; } = new ReactiveCommand();
@@ -51,6 +105,7 @@ namespace WPFApp.ViewModels
 
         public MainWindowViewModel()
         {
+            Fomula = FomulaListObj.ObserveProperty(x => x.Count).Select(_ => string.Join(string.Empty, FomulaListObj)).ToReadOnlyReactivePropertySlim();
             ContentRenderedCommand.Subscribe(() =>
             {
                 var window = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w is MainWindow);
@@ -59,7 +114,7 @@ namespace WPFApp.ViewModels
                 mw.display.SelectAll();
             })
             .AddTo(disposables);
-            Fomula.Value = string.Empty;
+            FomulaListObj.Clear();
             Display.Value = "0";
             clearFlag = true;
             DisplayTextChangedCommand.Subscribe(e =>
@@ -69,14 +124,11 @@ namespace WPFApp.ViewModels
                 var textbox = e.Source as TextBox;
                 if (ctrlV)
                 {
-                    Fomula.Value += textbox.Text;
+                    FomulaListObj.Append(textbox.Text);
                 }
                 else
                 {
-                    if (textbox.Text.Length - 1 >= 0)
-                    {
-                        Fomula.Value += Display.Value.Substring(Display.Value.IndexOf(textbox.Text) + textbox.Text.Length - 1);
-                    }
+                    FomulaListObj.ReplaceLastString(textbox.Text);
                 }
             })
             .AddTo(disposables);
@@ -95,12 +147,12 @@ namespace WPFApp.ViewModels
                     Display.Value = "0";
                     clearFlag = true;
                 }
-                Fomula.Value = Fomula.Value.Substring(0, Fomula.Value.Length - 1);
+                FomulaListObj.RemoveLastChar();
             })
             .AddTo(disposables);
             ClearEntryCommand.Subscribe(() =>
             {
-                Fomula.Value = string.Empty;
+                FomulaListObj.Initialize();
                 ctrlV = false;
                 equalFlag = true;
                 Display.Value = "0";
@@ -112,7 +164,7 @@ namespace WPFApp.ViewModels
             {
                 if (Fomula.Value.Length == 0)
                     return;
-                Fomula.Value = Fomula.Value.Substring(0, Fomula.Value.LastIndexOf(Display.Value));
+                FomulaListObj.RemoveLastString();
                 ctrlV = false;
                 Display.Value = "0";
                 clearFlag = true;
@@ -122,7 +174,7 @@ namespace WPFApp.ViewModels
             DivideCommand.Subscribe(() =>
             {
                 RemovePreviousAddedOperatorIfPreviousCharIsOperator();
-                Fomula.Value += "÷";
+                FomulaListObj.Add("÷");
                 ctrlV = false;
                 clearFlag = true;
                 equalFlag = false;
@@ -131,7 +183,7 @@ namespace WPFApp.ViewModels
             MultipleCommand.Subscribe(() =>
             {
                 RemovePreviousAddedOperatorIfPreviousCharIsOperator();
-                Fomula.Value += "×";
+                FomulaListObj.Add("×");
                 ctrlV = false;
                 clearFlag = true;
                 equalFlag = false;
@@ -140,7 +192,7 @@ namespace WPFApp.ViewModels
             MinusCommand.Subscribe(() =>
             {
                 RemovePreviousAddedOperatorIfPreviousCharIsOperator();
-                Fomula.Value += "-";
+                FomulaListObj.Add("-");
                 ctrlV = false;
                 clearFlag = true;
                 equalFlag = false;
@@ -149,7 +201,7 @@ namespace WPFApp.ViewModels
             PlusCommand.Subscribe(() =>
             {
                 RemovePreviousAddedOperatorIfPreviousCharIsOperator();
-                Fomula.Value += "+";
+                FomulaListObj.Add("+");
                 ctrlV = false;
                 clearFlag = true;
                 equalFlag = false;
@@ -158,7 +210,6 @@ namespace WPFApp.ViewModels
             PlusMinusCommand.Subscribe(() =>
             {
                 var temp = Display.Value;
-                Fomula.Value = Fomula.Value.Substring(0, Fomula.Value.LastIndexOf(Display.Value));
                 Display.Value = "0";
                 if (temp.StartsWith("-"))
                 {
@@ -179,7 +230,7 @@ namespace WPFApp.ViewModels
                         Display.Value = $"-{temp}";
                     }
                 }
-                Fomula.Value += Display.Value;
+                FomulaListObj.ReplaceLastString(Display.Value);
             })
             .AddTo(disposables);
             EqualCommand.Subscribe(() =>
@@ -318,7 +369,7 @@ namespace WPFApp.ViewModels
         {
             if (IfPreviousCharIsOperator())
             {
-                Fomula.Value = Fomula.Value.Substring(0, Fomula.Value.Length - 1);
+                FomulaListObj.RemoveLastChar();
             }
         }
 

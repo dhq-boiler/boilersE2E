@@ -414,8 +414,18 @@ namespace boilersE2E.Core
 
         protected void ActionWithLog(Action action, string logmessage)
         {
-            action();
-            s_logger.Info(logmessage);
+            try
+            {
+                action();
+            }
+            catch (WebDriverException)
+            {
+
+            }
+            finally
+            {
+                s_logger.Info(logmessage);
+            }
         }
 
         protected bool FuncWithLog(Func<bool> func, string logmessage)
@@ -423,6 +433,10 @@ namespace boilersE2E.Core
             try
             {
                 return func();
+            }
+            catch (WebDriverException)
+            {
+                return false;
             }
             finally
             {
