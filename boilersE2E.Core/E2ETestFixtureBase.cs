@@ -131,7 +131,8 @@ namespace boilersE2E.Core
 
                         if (FuncWithLog(() => elm.Text.Equals(text), "I"))
                         {
-                            break;
+                            s_logger.Info($"input test=[{text}] is copied.");
+                            return;
                         }
                     }
                 }
@@ -147,6 +148,8 @@ namespace boilersE2E.Core
                 }
 
                 Thread.Sleep(100);
+
+                s_logger.Info($"continue to next loop...");
             }
         }
 
