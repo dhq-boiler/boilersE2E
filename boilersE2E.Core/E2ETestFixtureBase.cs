@@ -134,9 +134,6 @@ namespace boilersE2E.Core
 
                     ActionWithLog(() => FocusFrontWindow(), "B: FocusFrontWindow()");
 
-                    //フォーカスを外す
-                    ActionWithLog(() => ExistsElementByAutomationID("DUMMY-ELEMENT", 100), "C: ExistsElementByAutomationID(\"DUMMY-ELEMENT\", 100)");
-
                     //フォーカスする
                     ActionWithLog(() => elm.Click(), "D: elm.Click()");
 
