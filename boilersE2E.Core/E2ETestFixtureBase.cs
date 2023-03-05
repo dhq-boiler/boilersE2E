@@ -173,8 +173,6 @@ namespace boilersE2E.Core
         /// <returns>取得したWindowsElementオブジェクト</returns>
         public WindowsElement GetElementByAutomationID(string automationId, int timeOutSeconds = 10)
         {
-            FocusCurrentWindow();
-
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
@@ -196,6 +194,7 @@ namespace boilersE2E.Core
                     }
                     catch (WebDriverException)
                     {
+                        FocusCurrentWindow();
                         return false;
                     }
                 });
@@ -217,8 +216,6 @@ namespace boilersE2E.Core
         /// <returns>取得したWindowsElementオブジェクト</returns>
         public WindowsElement GetElementByName(string name, int timeOutSeconds = 10)
         {
-            FocusCurrentWindow();
-
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
@@ -233,8 +230,16 @@ namespace boilersE2E.Core
             {
                 wait.Until(Driver =>
                 {
-                    element = Driver.FindElementByName(name);
-                    return element != null;
+                    try
+                    {
+                        element = Driver.FindElementByName(name);
+                        return element != null;
+                    }
+                    catch (WebDriverException)
+                    {
+                        FocusCurrentWindow();
+                        return false;
+                    }
                 });
             }
             catch (WebDriverTimeoutException ex)
@@ -270,8 +275,16 @@ namespace boilersE2E.Core
             {
                 wait.Until(Driver =>
                 {
-                    element = Driver.FindElement(by);
-                    return element != null;
+                    try
+                    {
+                        element = Driver.FindElement(by);
+                        return element != null;
+                    }
+                    catch (WebDriverException)
+                    {
+                        FocusCurrentWindow();
+                        return false;
+                    }
                 });
             }
             catch (WebDriverTimeoutException ex)
@@ -313,6 +326,7 @@ namespace boilersE2E.Core
                     }
                     catch (WebDriverException)
                     {
+                        FocusCurrentWindow();
                         return false;
                     }
                 });
@@ -336,8 +350,6 @@ namespace boilersE2E.Core
         {
             try
             {
-                FocusCurrentWindow();
-
                 Session.FindElement(by);
                 return true;
             }
@@ -347,7 +359,20 @@ namespace boilersE2E.Core
             }
             catch (WebDriverException)
             {
-                return false;
+                try
+                {
+                    FocusCurrentWindow();
+                    Session.FindElement(by);
+                    return true;
+                }
+                catch (NoSuchElementException)
+                {
+                    return false;
+                }
+                catch (WebDriverException)
+                {
+                    return false;
+                }
             }
         }
 
