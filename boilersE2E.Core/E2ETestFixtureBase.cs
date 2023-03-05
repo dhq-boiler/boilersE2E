@@ -50,6 +50,8 @@ namespace boilersE2E.Core
         {
             if (Session is null)
                 return;
+            if (!Session.WindowHandles.Any())
+                return;
             Session.SwitchTo().Window(Session.WindowHandles.First()).Manage().Window.Maximize();
         }
 
