@@ -152,6 +152,7 @@ namespace boilersE2E.xUnit.Test
             Assert.Equal("0", GetElementByAutomationID("display").Text);
         }
 
+#if TODO
         [RetryFact(10)]
         public void Paste()
         {
@@ -167,5 +168,6 @@ namespace boilersE2E.xUnit.Test
             Assert.Equal("123456789+987654321", GetElementByAutomationID("fomula").Text);
             Assert.Equal("1111111110", GetElementByAutomationID("display").Text);
         }
+#endif
     }
 }

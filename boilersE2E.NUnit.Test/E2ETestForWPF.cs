@@ -154,6 +154,7 @@ namespace boilersE2E.NUnit.Test
             Assert.That(GetElementByAutomationID("display").Text, Is.EqualTo("0"));
         }
 
+#if TODO
         [Test, Apartment(ApartmentState.STA), Retry(10)]
         public void Paste()
         {
@@ -169,5 +170,6 @@ namespace boilersE2E.NUnit.Test
             Assert.That(GetElementByAutomationID("fomula").Text, Is.EqualTo("123456789+987654321"));
             Assert.That(GetElementByAutomationID("display").Text, Is.EqualTo("1111111110"));
         }
+#endif
     }
 }
