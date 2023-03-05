@@ -128,7 +128,7 @@ namespace boilersE2E.Core
                         ActionWithLog(() => sim.Keyboard.TextEntry(text), "G");
                         ActionWithLog(() => sim.Keyboard.Sleep(100), "H");
 
-                        if (FuncWithLog(() => elm.Text.Equals(text), "I"))
+                        if (FuncWithLog(() => elm.Text.Equals(text), $"I: \"{elm.Text}\".Equals(\"{text}\")"))
                         {
                             s_logger.Info($"input test=[{text}] is copied.");
                             return;
