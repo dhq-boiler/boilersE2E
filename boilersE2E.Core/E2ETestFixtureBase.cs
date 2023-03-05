@@ -103,7 +103,6 @@ namespace boilersE2E.Core
             {
                 InputSimulator sim = new InputSimulator();
                 ActionWithLog(() => sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.TAB), "focus current window by Alt + TAB");
-                ActionWithLog(() => sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.TAB), "focus current window by Alt + TAB");
             }
             catch (WebDriverException e)
             {
