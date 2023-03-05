@@ -130,25 +130,27 @@ namespace boilersE2E.Core
                 {
                     InputSimulator sim = new InputSimulator();
 
-                    ActionWithLog(() => Session.SwitchTo().Window(Session.CurrentWindowHandle), "A");
+                    ActionWithLog(() => Session.SwitchTo().Window(Session.CurrentWindowHandle), "A: Session.SwitchTo().Window(Session.CurrentWindowHandle)");
 
-                    FocusFrontWindow();
+                    ActionWithLog(() => FocusFrontWindow(), "B: FocusFrontWindow()");
 
                     //フォーカスを外す
-                    ActionWithLog(() => ExistsElementByAutomationID("DUMMY-ELEMENT", 100), "B");
+                    ActionWithLog(() => ExistsElementByAutomationID("DUMMY-ELEMENT", 100), "C: ExistsElementByAutomationID(\"DUMMY-ELEMENT\", 100)");
 
                     //フォーカスする
-                    ActionWithLog(() => elm.Click(), "C");
+                    ActionWithLog(() => elm.Click(), "D: elm.Click()");
 
                     if (elm.Displayed)
                     {
-                        ActionWithLog(() => sim.Keyboard.KeyDown(VirtualKeyCode.DELETE), "D");
-                        ActionWithLog(() => sim.Keyboard.Sleep(1000), "E");
-                        ActionWithLog(() => sim.Keyboard.KeyUp(VirtualKeyCode.DELETE), "F");
-                        ActionWithLog(() => sim.Keyboard.TextEntry(text), "G");
-                        ActionWithLog(() => sim.Keyboard.Sleep(100), "H");
+                        ActionWithLog(() => elm.ClearCache(), "E: ClearCache()");
+                        ActionWithLog(() => elm.DisableCache(), "F: DisableCache()");
+                        ActionWithLog(() => sim.Keyboard.KeyDown(VirtualKeyCode.DELETE), "G: sim.Keyboard.KeyDown(VirtualKeyCode.DELETE)");
+                        ActionWithLog(() => sim.Keyboard.Sleep(1000), "H: sim.Keyboard.Sleep(1000)");
+                        ActionWithLog(() => sim.Keyboard.KeyUp(VirtualKeyCode.DELETE), "I: sim.Keyboard.KeyUp(VirtualKeyCode.DELETE)");
+                        ActionWithLog(() => sim.Keyboard.TextEntry(text), "J: sim.Keyboard.TextEntry(text)");
+                        ActionWithLog(() => sim.Keyboard.Sleep(100), "K: sim.Keyboard.Sleep(100)");
 
-                        if (FuncWithLog(() => elm.Text.Equals(text), $"I: \"{elm.Text}\".Equals(\"{text}\")"))
+                        if (FuncWithLog(() => elm.Text.Equals(text), $"L: \"{elm.Text}\".Equals(\"{text}\")"))
                         {
                             s_logger.Info($"input test=[{text}] is copied.");
                             return;
