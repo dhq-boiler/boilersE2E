@@ -153,8 +153,8 @@ namespace boilersE2E.Core
                         if (FuncWithLog(() => elm.Text.Equals(text), $"L: \"{elm.Text}\".Equals(\"{text}\")"))
                         {
                             s_logger.Info($"input test=[{text}] is copied.");
-                            return;
                         }
+                        return;
                     }
                 }
                 catch (WebDriverException e)
