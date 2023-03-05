@@ -96,6 +96,20 @@ namespace boilersE2E.Core
                 return waitElement;
             }
         }
+
+        protected void FocusCurrentWindow()
+        {
+            try
+            {
+                InputSimulator sim = new InputSimulator();
+                ActionWithLog(() => sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.TAB), "focus current window by Alt + TAB");
+                ActionWithLog(() => sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.TAB), "focus current window by Alt + TAB");
+            }
+            catch (WebDriverException e)
+            {
+                s_logger.Error(e);
+            }
+        }
         
         /// <summary>
         /// 要素に文字列を入力します。
@@ -112,7 +126,7 @@ namespace boilersE2E.Core
 
                     ActionWithLog(() => Session.SwitchTo().Window(Session.CurrentWindowHandle), "A");
 
-                    ActionWithLog(() => sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.TAB), "AA");
+                    FocusCurrentWindow();
 
                     //フォーカスを外す
                     ActionWithLog(() => ExistsElementByAutomationID("DUMMY-ELEMENT", 100), "B");
@@ -158,8 +172,10 @@ namespace boilersE2E.Core
         /// <param name="automationId">AutomationID</param>
         /// <param name="timeOutSeconds">タイムアウト秒数</param>
         /// <returns>取得したWindowsElementオブジェクト</returns>
-        public static WindowsElement GetElementByAutomationID(string automationId, int timeOutSeconds = 10)
+        public WindowsElement GetElementByAutomationID(string automationId, int timeOutSeconds = 10)
         {
+            FocusCurrentWindow();
+
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
@@ -200,8 +216,10 @@ namespace boilersE2E.Core
         /// <param name="name">要素の名前</param>
         /// <param name="timeOutSeconds">タイムアウト秒数</param>
         /// <returns>取得したWindowsElementオブジェクト</returns>
-        public static WindowsElement GetElementByName(string name, int timeOutSeconds = 10)
+        public WindowsElement GetElementByName(string name, int timeOutSeconds = 10)
         {
+            FocusCurrentWindow();
+
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
@@ -235,8 +253,10 @@ namespace boilersE2E.Core
         /// <param name="by">OpenQA.Selenium.Byオブジェクト</param>
         /// <param name="timeOutSeconds">タイムアウト秒数</param>
         /// <returns>取得したWindowsElementオブジェクト</returns>
-        public static WindowsElement GetElementBy(By by, int timeOutSeconds = 10)
+        public WindowsElement GetElementBy(By by, int timeOutSeconds = 10)
         {
+            FocusCurrentWindow();
+
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
@@ -269,8 +289,10 @@ namespace boilersE2E.Core
         /// <param name="automationId">AutomationID</param>
         /// <param name="timeOutMilliseconds">タイムアウトミリ秒数</param>
         /// <returns>存在する場合は true、存在しない場合は false を返します。</returns>
-        public static bool ExistsElementByAutomationID(string automationId, int timeOutMilliseconds = 10000)
+        public bool ExistsElementByAutomationID(string automationId, int timeOutMilliseconds = 10000)
         {
+            FocusCurrentWindow();
+
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
@@ -311,10 +333,12 @@ namespace boilersE2E.Core
         /// </summary>
         /// <param name="by">OpenQA.Selenium.Byオブジェクト</param>
         /// <returns>存在する場合は true、存在しない場合は false を返します。</returns>
-        public static bool IsElementPresent(By by)
+        public bool IsElementPresent(By by)
         {
             try
             {
+                FocusCurrentWindow();
+
                 Session.FindElement(by);
                 return true;
             }
