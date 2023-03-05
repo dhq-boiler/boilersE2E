@@ -96,8 +96,7 @@ namespace boilersE2E.Core
                 return waitElement;
             }
         }
-
-        [STAThread]
+        
         /// <summary>
         /// 要素に文字列を入力します。
         /// </summary>
