@@ -97,12 +97,19 @@ namespace boilersE2E.Core
             }
         }
 
-        protected void FocusCurrentWindow()
+        protected void FocusFrontWindow()
         {
             try
             {
-                InputSimulator sim = new InputSimulator();
-                ActionWithLog(() => sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.TAB), "focus current window by Alt + TAB");
+                var allWindowHandles = Session.WindowHandles; //hold focus on the active window
+                var frontWindow = allWindowHandles.LastOrDefault();
+                if (frontWindow is null)
+                {
+                    s_logger.Warn($"empty target.");
+                    return;
+                }
+                Session.SwitchTo().Window(frontWindow);
+                Thread.Sleep(100);
             }
             catch (WebDriverException e)
             {
@@ -125,7 +132,7 @@ namespace boilersE2E.Core
 
                     ActionWithLog(() => Session.SwitchTo().Window(Session.CurrentWindowHandle), "A");
 
-                    FocusCurrentWindow();
+                    FocusFrontWindow();
 
                     //フォーカスを外す
                     ActionWithLog(() => ExistsElementByAutomationID("DUMMY-ELEMENT", 100), "B");
@@ -194,7 +201,7 @@ namespace boilersE2E.Core
                     }
                     catch (WebDriverException)
                     {
-                        FocusCurrentWindow();
+                        FocusFrontWindow();
                         return false;
                     }
                 });
@@ -237,7 +244,7 @@ namespace boilersE2E.Core
                     }
                     catch (WebDriverException)
                     {
-                        FocusCurrentWindow();
+                        FocusFrontWindow();
                         return false;
                     }
                 });
@@ -259,8 +266,6 @@ namespace boilersE2E.Core
         /// <returns>取得したWindowsElementオブジェクト</returns>
         public WindowsElement GetElementBy(By by, int timeOutSeconds = 10)
         {
-            FocusCurrentWindow();
-
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
@@ -282,7 +287,7 @@ namespace boilersE2E.Core
                     }
                     catch (WebDriverException)
                     {
-                        FocusCurrentWindow();
+                        FocusFrontWindow();
                         return false;
                     }
                 });
@@ -303,8 +308,6 @@ namespace boilersE2E.Core
         /// <returns>存在する場合は true、存在しない場合は false を返します。</returns>
         public bool ExistsElementByAutomationID(string automationId, int timeOutMilliseconds = 10000)
         {
-            FocusCurrentWindow();
-
             WindowsElement element = null;
 
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Session)
@@ -326,7 +329,7 @@ namespace boilersE2E.Core
                     }
                     catch (WebDriverException)
                     {
-                        FocusCurrentWindow();
+                        FocusFrontWindow();
                         return false;
                     }
                 });
@@ -361,7 +364,7 @@ namespace boilersE2E.Core
             {
                 try
                 {
-                    FocusCurrentWindow();
+                    FocusFrontWindow();
                     Session.FindElement(by);
                     return true;
                 }
