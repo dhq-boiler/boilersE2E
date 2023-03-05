@@ -50,6 +50,8 @@ namespace boilersE2E.Core
         {
             if (Session is null)
                 return;
+            if (!Session.WindowHandles.Any())
+                return;
             Session.SwitchTo().Window(Session.WindowHandles.First()).Manage().Window.Maximize();
         }
 
@@ -123,11 +125,23 @@ namespace boilersE2E.Core
         /// <param name="text">入力する文字列</param>
         public void InputText(WindowsElement elm, string text)
         {
+            if (elm is null)
+                throw new ArgumentNullException(nameof(elm));
+
+            if (text is null)
+                throw new ArgumentNullException(nameof(text));
+
             int count = 0;
             while (true)
             {
                 try
                 {
+                    if (Session is null)
+                        throw new Exception("Session is null");
+
+                    if (Session.CurrentWindowHandle is null)
+                        throw new Exception("Session.CurrentWindowHandle is null");
+
                     InputSimulator sim = new InputSimulator();
 
                     ActionWithLog(() => Session.SwitchTo().Window(Session.CurrentWindowHandle), "A: Session.SwitchTo().Window(Session.CurrentWindowHandle)");
