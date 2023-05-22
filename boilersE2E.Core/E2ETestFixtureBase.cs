@@ -36,6 +36,8 @@ namespace boilersE2E.Core
         /// </summary>
         public static string EnvironmentVariableNameWhereSetWindowSizeManually { get; set; } = "BOILERS_E2ETEST_SET_WINDOWSIZE_MANUAL";
 
+        public static string EnvironmentVariableNameWhereMaximizeWindow { get; set; } = "BOILERS_E2ETEST_SET_MAXIMIZEWINDOW";
+
         /// <summary>
         /// テストするアプリケーションのパスを指定します。
         /// </summary>
