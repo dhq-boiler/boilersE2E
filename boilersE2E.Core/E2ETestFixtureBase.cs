@@ -458,7 +458,10 @@ namespace boilersE2E.Core
             finally
             {
                 s_logger.Trace($"Being Session.Quit().");
-                Session.Quit();
+                if (Session is not null)
+                {
+                    Session.Quit();
+                }
                 s_logger.Trace($"End Session.Quit().");
                 Session = null;
             }
