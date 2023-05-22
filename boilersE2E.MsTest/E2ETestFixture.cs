@@ -41,7 +41,7 @@ namespace boilersE2E.MsTest
             var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (WinAppDriverProcess is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
             {
-                WinAppDriverProcess = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
+                WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverInstalledDirectoryPath));
             }
         }
 
@@ -72,7 +72,7 @@ namespace boilersE2E.MsTest
             var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (WinAppDriverProcess is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
             {
-                WinAppDriverProcess = Process.Start(new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
+                WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverInstalledDirectoryPath));
                 s_logger.Debug($"[{TestContext.TestName}]Started WinAppDriver.exe process.");
             }
 

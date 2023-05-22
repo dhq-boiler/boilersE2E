@@ -18,7 +18,7 @@ namespace boilersE2E.xUnit
             {
                 E2ETestFixture.WinAppDriverProcess =
                     Process.Start(
-                        new ProcessStartInfo(@"C:\Program Files\Windows Application Driver\WinAppDriver.exe"));
+                        new ProcessStartInfo(E2ETestFixture.WinAppDriverInstalledDirectoryPath));
             }
         }
 
