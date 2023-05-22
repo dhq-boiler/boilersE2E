@@ -93,7 +93,9 @@ namespace boilersE2E.MsTest
                 {
                     Session.Manage().Window.Size = new Size(WindowSize.Width, WindowSize.Height);
                 }
-                else
+
+                environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereMaximizeWindow);
+                if (environmentVariable == "true" || environmentVariable == 1.ToString())
                 {
                     MaximizeWindow();
                 }
