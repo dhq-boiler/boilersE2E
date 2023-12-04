@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>net7.0-windows10.0.22000.0;net6.0-windows10.0.22000.0</TargetFrameworks>
+	<TargetFrameworks>net8.0-windows10.0.22000.0;net7.0-windows10.0.22000.0;net6.0-windows10.0.22000.0</TargetFrameworks>
 	<ImplicitUsings>enable</ImplicitUsings>
 	<Nullable>enable</Nullable>
 	<OutputType>Library</OutputType>
@@ -19,12 +19,11 @@
     <PackageReference Include="GitInfo" Version="2.3.0">
 	  <PrivateAssets>all</PrivateAssets>
 	</PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0-preview-20221003-04" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
-	<PackageReference Include="NLog" Version="5.1.2">
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+	<PackageReference Include="NLog" Version="5.2.7">
 	  <PrivateAssets>all</PrivateAssets>
 	</PackageReference>
-    <PackageReference Include="NuGet.CommandLine" Version="6.3.1">
+    <PackageReference Include="NuGet.CommandLine" Version="6.8.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

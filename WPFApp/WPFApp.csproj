@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-	<TargetFrameworks>net7.0-windows10.0.22000.0;net6.0-windows10.0.22000.0</TargetFrameworks>
+	<TargetFrameworks>net8.0-windows10.0.22000.0;net7.0-windows10.0.22000.0;net6.0-windows10.0.22000.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <IsPackable>false</IsPackable>
@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
-    <PackageReference Include="ReactiveProperty.WPF" Version="8.2.0" />
+    <PackageReference Include="ReactiveProperty.WPF" Version="9.3.4" />
   </ItemGroup>
 
 </Project>
