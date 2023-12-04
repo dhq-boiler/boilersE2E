@@ -79,7 +79,7 @@ namespace boilersE2E.NUnit
                 s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Begin CreateSession().");
                 CreateSession();
                 s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]End CreateSession().");
-                Assert.IsNotNull(Session);
+                Assert.That(Session, Is.Not.Null);
 
                 s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Begin DoAfterBoot().");
                 DoAfterBoot();
