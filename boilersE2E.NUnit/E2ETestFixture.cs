@@ -39,7 +39,8 @@ namespace boilersE2E.NUnit
             var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
-                WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverInstalledDirectoryPath));
+                Assert.That(File.Exists(WinAppDriverPath), Is.True, "WinAppDriver doesn't installed");
+                WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverPath));
             }
         }
 
@@ -70,7 +71,8 @@ namespace boilersE2E.NUnit
             var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (WinAppDriverProcess is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
             {
-                WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverInstalledDirectoryPath));
+                Assert.That(File.Exists(WinAppDriverPath), Is.True, "WinAppDriver doesn't installed");
+                WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverPath));
                 s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Started WinAppDriver.exe process.");
             }
 
@@ -79,7 +81,7 @@ namespace boilersE2E.NUnit
                 s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Begin CreateSession().");
                 CreateSession();
                 s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]End CreateSession().");
-                Assert.IsNotNull(Session);
+                Assert.That(Session, Is.Not.Null);
 
                 s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Begin DoAfterBoot().");
                 DoAfterBoot();
@@ -156,6 +158,7 @@ namespace boilersE2E.NUnit
             var options = new AppiumOptions();
             options.AddAdditionalCapability("app", AppPath);
             options.AddAdditionalCapability("appWorkingDir", Path.GetDirectoryName(AppPath));
+            Assert.That(File.Exists(WinAppDriverPath), Is.True, "WinAppDriver doesn't installed");
             try
             {
                 Session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), options);

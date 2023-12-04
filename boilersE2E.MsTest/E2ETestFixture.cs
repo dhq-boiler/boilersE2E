@@ -41,7 +41,8 @@ namespace boilersE2E.MsTest
             var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (WinAppDriverProcess is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
             {
-                WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverInstalledDirectoryPath));
+                Assert.IsTrue(File.Exists(WinAppDriverPath), "WinAppDriver doesn't installed");
+                WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverPath));
             }
         }
 
@@ -72,7 +73,8 @@ namespace boilersE2E.MsTest
             var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (WinAppDriverProcess is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
             {
-                WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverInstalledDirectoryPath));
+                Assert.IsTrue(File.Exists(WinAppDriverPath), "WinAppDriver doesn't installed");
+                WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverPath));
                 s_logger.Debug($"[{TestContext.TestName}]Started WinAppDriver.exe process.");
             }
 
@@ -158,6 +160,7 @@ namespace boilersE2E.MsTest
             var options = new AppiumOptions();
             options.AddAdditionalCapability("app", AppPath);
             options.AddAdditionalCapability("appWorkingDir", Path.GetDirectoryName(AppPath));
+            Assert.IsTrue(File.Exists(WinAppDriverPath), "WinAppDriver doesn't installed");
             try
             {
                 Session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), options);
