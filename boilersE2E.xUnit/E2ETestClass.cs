@@ -1,11 +1,14 @@
 using OpenQA.Selenium.Appium.Windows;
 using System.Diagnostics;
+using System.IO;
+using boilersE2E.Core;
+using Xunit;
 
 namespace boilersE2E.xUnit
 {
     public abstract class E2ETestClass : IDisposable
     {
-        public WindowsDriver<WindowsElement> Session => E2ETestFixture.Session;
+        public WindowsDriver<WindowsElement> Session => E2ETestFixtureBase.Session;
 
         /// <summary>
         /// コンストラクター
@@ -13,12 +16,13 @@ namespace boilersE2E.xUnit
         /// </summary>
         public E2ETestClass()
         {
-            var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixture.EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
+            var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixtureBase.EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
-                E2ETestFixture.WinAppDriverProcess =
+                Assert.True(File.Exists(E2ETestFixtureBase.WinAppDriverInstalledDirectoryPath), "WinAppDriver doesn't installed");
+                E2ETestFixtureBase.WinAppDriverProcess =
                     Process.Start(
-                        new ProcessStartInfo(E2ETestFixture.WinAppDriverInstalledDirectoryPath));
+                        new ProcessStartInfo(E2ETestFixtureBase.WinAppDriverInstalledDirectoryPath));
             }
         }
 
@@ -28,10 +32,10 @@ namespace boilersE2E.xUnit
         /// </summary>
         public void Dispose()
         {
-            var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixture.EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
+            var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixtureBase.EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
-                E2ETestFixture.WinAppDriverProcess.Kill();
+                E2ETestFixtureBase.WinAppDriverProcess.Kill();
             }
         }
     }

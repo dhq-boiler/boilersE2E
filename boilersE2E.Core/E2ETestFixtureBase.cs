@@ -5,6 +5,7 @@ using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
 using WindowsInput;
 using WindowsInput.Native;
@@ -490,6 +491,10 @@ namespace boilersE2E.Core
                 WinAppDriverProcess = null;
             }
             s_logger.Trace($"Being Process.Start().");
+            if (!File.Exists(WinAppDriverInstalledDirectoryPath))
+            {
+                throw new NotInstalledException(WinAppDriverInstalledDirectoryPath);
+            }
             WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverInstalledDirectoryPath));
             s_logger.Trace($"End Process.Start().");
             s_logger.Debug($"End RebootWinAppDriver().");

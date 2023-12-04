@@ -39,6 +39,7 @@ namespace boilersE2E.NUnit
             var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
+                Assert.That(File.Exists(WinAppDriverInstalledDirectoryPath), Is.True, "WinAppDriver doesn't installed");
                 WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverInstalledDirectoryPath));
             }
         }
@@ -70,6 +71,7 @@ namespace boilersE2E.NUnit
             var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (WinAppDriverProcess is null && (environmentVariable == "true" || environmentVariable == 1.ToString()))
             {
+                Assert.That(File.Exists(WinAppDriverInstalledDirectoryPath), Is.True, "WinAppDriver doesn't installed");
                 WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverInstalledDirectoryPath));
                 s_logger.Debug($"[{TestContext.CurrentContext.Test.Name}]Started WinAppDriver.exe process.");
             }
@@ -156,6 +158,7 @@ namespace boilersE2E.NUnit
             var options = new AppiumOptions();
             options.AddAdditionalCapability("app", AppPath);
             options.AddAdditionalCapability("appWorkingDir", Path.GetDirectoryName(AppPath));
+            Assert.That(File.Exists(WinAppDriverInstalledDirectoryPath), Is.True, "WinAppDriver doesn't installed");
             try
             {
                 Session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), options);
