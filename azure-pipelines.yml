@@ -15,8 +15,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  dotNetFrameworks: 'net7.0'
-  dotNetVersion: '7.0.x'
+  dotNetFrameworks: 'net8.0'
+  dotNetVersion: '8.0.x'
 
 steps:
 
@@ -28,6 +28,12 @@ steps:
 
 - task: UseDotNet@2
   displayName: 'Use .NET 7 framework'
+  inputs:
+    version: '7.0.x'
+    includePreviewVersions: true
+
+- task: UseDotNet@2
+  displayName: 'Use .NET 8 framework'
   inputs:
     version: $(dotNetVersion)
     includePreviewVersions: true
