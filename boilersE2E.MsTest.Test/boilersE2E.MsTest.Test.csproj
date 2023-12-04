@@ -15,6 +15,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MSTestEx" Version="1.0.4" />
+    <PackageReference Include="NLog" Version="5.2.7" />
   </ItemGroup>
 
   <ItemGroup>
