@@ -19,10 +19,10 @@ namespace boilersE2E.xUnit
             var environmentVariable = Environment.GetEnvironmentVariable(E2ETestFixtureBase.EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
             if (environmentVariable == "true" || environmentVariable == 1.ToString())
             {
-                Assert.True(File.Exists(E2ETestFixtureBase.WinAppDriverInstalledDirectoryPath), "WinAppDriver doesn't installed");
+                Assert.True(File.Exists(E2ETestFixtureBase.WinAppDriverPath), "WinAppDriver doesn't installed");
                 E2ETestFixtureBase.WinAppDriverProcess =
                     Process.Start(
-                        new ProcessStartInfo(E2ETestFixtureBase.WinAppDriverInstalledDirectoryPath));
+                        new ProcessStartInfo(E2ETestFixtureBase.WinAppDriverPath));
             }
         }
 

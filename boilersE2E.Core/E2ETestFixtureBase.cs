@@ -17,7 +17,7 @@ namespace boilersE2E.Core
         protected const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723";
         private static readonly Logger s_logger = LogManager.GetCurrentClassLogger();
 
-        public static string WinAppDriverInstalledDirectoryPath { get; set; } = @"C:\Program Files\Windows Application Driver\WinAppDriver.exe";
+        public static string WinAppDriverPath { get; set; } = @"C:\Program Files\Windows Application Driver\WinAppDriver.exe";
 
         public static Process WinAppDriverProcess { get; set; }
 
@@ -491,11 +491,11 @@ namespace boilersE2E.Core
                 WinAppDriverProcess = null;
             }
             s_logger.Trace($"Being Process.Start().");
-            if (!File.Exists(WinAppDriverInstalledDirectoryPath))
+            if (!File.Exists(WinAppDriverPath))
             {
-                throw new NotInstalledException(WinAppDriverInstalledDirectoryPath);
+                throw new NotInstalledException(WinAppDriverPath);
             }
-            WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverInstalledDirectoryPath));
+            WinAppDriverProcess = Process.Start(new ProcessStartInfo(WinAppDriverPath));
             s_logger.Trace($"End Process.Start().");
             s_logger.Debug($"End RebootWinAppDriver().");
         }
