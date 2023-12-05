@@ -12,13 +12,13 @@
     <copyright>$copyright$</copyright>
     <tags>C# E2E Test Desktop NUnit</tags>
 	<dependencies>
-		<group targetFramework="net6.0">
+		<group targetFramework="net6.0-windows10.0.22000.0">
 			<dependency id="boilersE2E.Core" version="5.0" />
 		</group>
-		<group targetFramework="net7.0">
+		<group targetFramework="net7.0-windows10.0.22000.0">
 			<dependency id="boilersE2E.Core" version="5.0" />
 		</group>
-		<group targetFramework="net8.0">
+		<group targetFramework="net8.0-windows10.0.22000.0">
 			<dependency id="boilersE2E.Core" version="5.0" />
 		</group>
 	</dependencies>
