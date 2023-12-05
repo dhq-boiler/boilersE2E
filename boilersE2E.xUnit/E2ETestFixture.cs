@@ -72,7 +72,13 @@ namespace boilersE2E.xUnit
             var options = new AppiumOptions();
             options.AddAdditionalCapability("app", AppPath);
             options.AddAdditionalCapability("appWorkingDir", Path.GetDirectoryName(AppPath));
-            Assert.True(File.Exists(WinAppDriverPath), "WinAppDriver doesn't installed");
+
+            var environmentVariable = Environment.GetEnvironmentVariable(EnvironmentVariableNameWhereWinAppDriverRunAutomatically);
+            if (environmentVariable == "true" || environmentVariable == 1.ToString())
+            {
+                Assert.True(File.Exists(WinAppDriverPath), "WinAppDriver doesn't installed");
+            }
+
             try
             {
                 Session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), options);
