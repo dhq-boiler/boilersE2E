@@ -21,4 +21,15 @@
 	  <file src="bin\Release\net8.0-windows10.0.22000.0\boilersE2E.Core.pdb"	target="lib\net8.0-windows10.0.22000.0" />
 	  <file src="**\*.cs" target="src" />
   </files>
+  <dependencies>
+	  <group targetFramework="net6.0">
+		  <dependency id="InputSimulator" version="1.0.4" />
+	  </group>
+	  <group targetFramework="net7.0">
+		  <dependency id="InputSimulator" version="1.0.4" />
+	  </group>
+	  <group targetFramework="net8.0">
+		  <dependency id="InputSimulator" version="1.0.4" />
+	  </group>
+  </dependencies>
 </package>
